@@ -1,25 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Supplier;
+// use App\Models\Brgmsk;
+// use App\Models\Product;
 
-use App\Http\Requests\FoodRequest;
-use App\Models\Food;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
-class FoodController extends Controller
+class SupplierController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $food = Food::paginate(10);
+        $supplier = Supplier::paginate(10);
 
-        return view('food.index',[
-            'food' => $food
+        return view('supplier.index',[
+            'supplier' => $supplier
         ]);
     }
 
@@ -30,7 +25,7 @@ class FoodController extends Controller
      */
     public function create()
     {
-        return view('food.create');
+        return view('supplier.create');
     }
 
     /**
@@ -39,15 +34,13 @@ class FoodController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(FoodRequest $request)
+    public function store(Request $request)
     {
         $data = $request->all();
 
-        $data['picturePath'] = $request->file('picturePath')->store('assets/food', 'public');
+        Supplier::create($data);
 
-        Food::create($data);
-
-        return redirect()->route('food.index');
+        return redirect()->route('supplier.index');
     }
 
     /**
@@ -67,10 +60,10 @@ class FoodController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Food $food)
+    public function edit(Supplier $supplier)
     {
-        return view('food.edit', [
-            'item' => $food
+        return view('supplier.edit', [
+            'item' => $supplier
         ]);
     }
 
@@ -81,20 +74,15 @@ class FoodController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Food $food)
+    public function update(Request $request, Supplier $supplier)
     {
         $data = $request->all();
 
-        if($request->file('picturePath'))
-        {
-            $data['picturePath'] = $request->file('picturePath')->store('assets/food', 'public');
-        }
-
-        $food->update($data);
+        $supplier->update($data);
 
         //dd($data);
 
-        return redirect()->route('food.index');
+        return redirect()->route('supplier.index');
 
     }
 
@@ -104,10 +92,10 @@ class FoodController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Food $food)
+    public function destroy(Supplier $supplier)
     {
-        $food->delete();
+        $supplier->delete();
 
-        return redirect()->route('food.index');
+        return redirect()->route('supplier.index');
     }
 }

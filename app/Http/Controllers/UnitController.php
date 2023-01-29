@@ -2,24 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\FoodRequest;
-use App\Models\Food;
-use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 
-class FoodController extends Controller
+class UnitController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+   public function index()
     {
-        $food = Food::paginate(10);
+        $unit = Unit::paginate(10);
 
-        return view('food.index',[
-            'food' => $food
+        return view('unit.index',[
+            'unit' => $unit
         ]);
     }
 
@@ -30,7 +23,7 @@ class FoodController extends Controller
      */
     public function create()
     {
-        return view('food.create');
+        return view('unit.create');
     }
 
     /**
@@ -39,15 +32,13 @@ class FoodController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(FoodRequest $request)
+    public function store(Request $request)
     {
         $data = $request->all();
 
-        $data['picturePath'] = $request->file('picturePath')->store('assets/food', 'public');
+        Unit::create($data);
 
-        Food::create($data);
-
-        return redirect()->route('food.index');
+        return redirect()->route('unit.index');
     }
 
     /**
@@ -67,10 +58,10 @@ class FoodController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Food $food)
+    public function edit(Unit $unit)
     {
-        return view('food.edit', [
-            'item' => $food
+        return view('unit.edit', [
+            'item' => $unit
         ]);
     }
 
@@ -81,20 +72,15 @@ class FoodController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Food $food)
+    public function update(Request $request, Unit $unit)
     {
         $data = $request->all();
 
-        if($request->file('picturePath'))
-        {
-            $data['picturePath'] = $request->file('picturePath')->store('assets/food', 'public');
-        }
-
-        $food->update($data);
+        $unit->update($data);
 
         //dd($data);
 
-        return redirect()->route('food.index');
+        return redirect()->route('unit.index');
 
     }
 
@@ -104,10 +90,10 @@ class FoodController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Food $food)
+    public function destroy(Unit $unit)
     {
-        $food->delete();
+        $unit->delete();
 
-        return redirect()->route('food.index');
+        return redirect()->route('unit.index');
     }
 }

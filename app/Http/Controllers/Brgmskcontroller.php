@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\FoodRequest;
-use App\Models\Food;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
+use App\Models\Brgmsk;
+use App\Models\Product;
+use App\Models\Supplier;
 
-class FoodController extends Controller
+class Brgmskcontroller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +16,10 @@ class FoodController extends Controller
      */
     public function index()
     {
-        $food = Food::paginate(10);
+        $customer = Brgmsk::with(['unit', 'product'])->paginate(10);
 
-        return view('food.index',[
-            'food' => $food
+        return view('customer.index',[
+            'customer' => $customer
         ]);
     }
 
@@ -30,7 +30,12 @@ class FoodController extends Controller
      */
     public function create()
     {
-        return view('food.create');
+       $unit = Unit::all();
+       $product = Product::all();
+        return view('customer.create', [
+            'unit' => $unit,
+            'product' => $product,
+        ]);
     }
 
     /**
@@ -39,15 +44,13 @@ class FoodController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(FoodRequest $request)
+    public function store(Request $request)
     {
         $data = $request->all();
 
-        $data['picturePath'] = $request->file('picturePath')->store('assets/food', 'public');
+        Customers::create($data);
 
-        Food::create($data);
-
-        return redirect()->route('food.index');
+        return redirect()->route('customer.index');
     }
 
     /**
@@ -67,10 +70,15 @@ class FoodController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Food $food)
+    public function edit(Customers $customer)
     {
-        return view('food.edit', [
-            'item' => $food
+        $unit = Unit::all();
+        $product = Product::all();
+
+        return view('customer.edit', [
+            'item' => $customer,
+            'unit' => $unit,
+            'product' => $product
         ]);
     }
 
@@ -81,20 +89,15 @@ class FoodController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Food $food)
+    public function update(Request $request, Customers $customer)
     {
         $data = $request->all();
 
-        if($request->file('picturePath'))
-        {
-            $data['picturePath'] = $request->file('picturePath')->store('assets/food', 'public');
-        }
-
-        $food->update($data);
+        $customer->update($data);
 
         //dd($data);
 
-        return redirect()->route('food.index');
+        return redirect()->route('customer.index');
 
     }
 
@@ -104,10 +107,11 @@ class FoodController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Food $food)
+    public function destroy(Customers $customer)
     {
-        $food->delete();
+        $customer->delete();
 
-        return redirect()->route('food.index');
+        return redirect()->route('customer.index');
     }
 }
+

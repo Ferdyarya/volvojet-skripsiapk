@@ -23,7 +23,7 @@
                     </x-jet-nav-link>
                 </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('food.index') }}" :active="request()->routeIs('food.index')">
                         {{ __('Food') }}
                     </x-jet-nav-link>
@@ -32,6 +32,42 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('transaction.index') }}" :active="request()->routeIs('transaction.index')">
                         {{ __('Transaction') }}
+                    </x-jet-nav-link>
+                </div> --}}
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('unit.index') }}" :active="request()->routeIs('unit.index')">
+                        {{ __('Unit') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('product.index') }}" :active="request()->routeIs('product.index')">
+                        {{ __('Product') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('customer.index') }}" :active="request()->routeIs('customer.index')">
+                        {{ __('Customers') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('sales.index') }}" :active="request()->routeIs('sales.index')">
+                        {{ __('Sales') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('supplier.index') }}" :active="request()->routeIs('supplier.index')">
+                        {{ __('Suplier') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('brgmsk.index') }}" :active="request()->routeIs('brgmsk.index')">
+                        {{ __('Barang Masuk') }}
                     </x-jet-nav-link>
                 </div>
 

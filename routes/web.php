@@ -1,11 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\MidtransController;
-use App\Http\Controllers\UsersController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FoodController;
+use App\Http\Controllers\UnitController;
+use App\Http\Controllers\BrgmskController;
+use App\Http\Controllers\SalesController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\API\MidtransController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +34,12 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', 'admin'])->group(functio
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('users', UsersController::class);
     Route::resource('food', FoodController::class);
+    Route::resource('unit', UnitController::class);
+    Route::resource('product', ProductController::class);
+    Route::resource('customer', CustomerController::class);
+    Route::resource('sales', SalesController::class);
+    Route::resource('supplier', SupplierController::class);
+    Route::resource('brgmsk', BrgmskController::class);
 
     // update status transaction
     Route::get('tranasctions/{id}/status/{status} ', [TransactionController::class, 'changeStatus'])->name('transaction.changeStatus');
