@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {!! __('Products &raquo; Create') !!}
+            {!! __('Barang Masuk &raquo; Create') !!}
         </h2>
     </x-slot>
 
@@ -26,7 +26,7 @@
                         </div>
                     </div>
                 @endif
-                <form action="{{ route('product.store') }}" class="w-full" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('brgmsk.store') }}" class="w-full" method="POST" enctype="multipart/form-data">
 
                     @csrf
 
@@ -34,35 +34,39 @@
                         <div class="w-full px-3">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                 for="grid-last-name">
-                                Unit
+                                Product
                             </label>
-                            <select name="id_unit"
+                            <select name="id_product"
                                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 id="grid-last-name">
-                                @foreach ($unit as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @foreach ($product as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
 
-                    <div class="flex flex-wrap -mx-3 mb-6">
-                        <div class="w-full px-3">
-                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                for="grid-last-name">Nama Product</label>
-                            <input value="{{ old('nama') }}" name="nama"
-                                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                id="grid-last-name" type="text" placeholder="Name Product">
-                        </div>
                     </div>
+
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                for="grid-last-name">
+                                Supplier
+                            </label>
+                            <select name="id_supplier"
+                                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                id="grid-last-name">
+                                @foreach ($supplier as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                @endforeach
+                            </select>
 
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                for="grid-last-name">Harga</label>
-                            <input value="{{ old('harga') }}" name="harga"
+                                for="grid-last-name">Tanggal</label>
+                            <input value="{{ old('tanggal') }}" name="tanggal"
                                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                id="grid-last-name" type="number" placeholder="Harga">
+                                id="grid-last-name" type="date" placeholder="Tanggal">
                         </div>
                     </div>
 
@@ -84,7 +88,7 @@
                         <div class="w-full px-3 text-right">
                             <button type="submit"
                                 class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                                Save Product
+                                Save Barang Masuk
                             </button>
                         </div>
                     </div>

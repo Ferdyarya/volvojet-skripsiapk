@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Models\Brgmsk;
 use App\Models\Product;
 use App\Models\Supplier;
@@ -16,10 +17,10 @@ class Brgmskcontroller extends Controller
      */
     public function index()
     {
-        $customer = Brgmsk::with(['unit', 'product'])->paginate(10);
+        $brgmsk = Brgmsk::with(['supplier', 'product'])->paginate(10);
 
-        return view('customer.index',[
-            'customer' => $customer
+        return view('brgmsk.index',[
+            'brgmsk' => $brgmsk
         ]);
     }
 
@@ -30,10 +31,10 @@ class Brgmskcontroller extends Controller
      */
     public function create()
     {
-       $unit = Unit::all();
+       $supplier = Supplier::all();
        $product = Product::all();
-        return view('customer.create', [
-            'unit' => $unit,
+        return view('brgmsk.create', [
+            'supplier' => $supplier,
             'product' => $product,
         ]);
     }
@@ -48,9 +49,9 @@ class Brgmskcontroller extends Controller
     {
         $data = $request->all();
 
-        Customers::create($data);
+        Brgmsk::create($data);
 
-        return redirect()->route('customer.index');
+        return redirect()->route('brgmsk.index');
     }
 
     /**
@@ -70,14 +71,14 @@ class Brgmskcontroller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Customers $customer)
+    public function edit(Brgmsk $brgmsk)
     {
-        $unit = Unit::all();
+        $supplier = Supplier::all();
         $product = Product::all();
 
-        return view('customer.edit', [
-            'item' => $customer,
-            'unit' => $unit,
+        return view('brgmsk.edit', [
+            'item' => $brgmsk,
+            'supplier' => $supplier,
             'product' => $product
         ]);
     }
@@ -89,15 +90,15 @@ class Brgmskcontroller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customers $customer)
+    public function update(Request $request, Brgmsk $brgmsk)
     {
         $data = $request->all();
 
-        $customer->update($data);
+        $brgmsk->update($data);
 
         //dd($data);
 
-        return redirect()->route('customer.index');
+        return redirect()->route('brgmsk.index');
 
     }
 
@@ -107,11 +108,11 @@ class Brgmskcontroller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customers $customer)
+    public function destroy(Brgmsk $brgmsk)
     {
-        $customer->delete();
+        $brgmsk->delete();
 
-        return redirect()->route('customer.index');
+        return redirect()->route('brgmsk.index');
     }
 }
 

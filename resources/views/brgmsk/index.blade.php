@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Brgmsk') }}
+            {{ __('Barang masuk') }}
         </h2>
     </x-slot>
 
@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="mb-10">
-                    <a href="{{ route('product.create') }}"
+                    <a href="{{ route('brgmsk.create') }}"
                         class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Create Barang Masuk</a>
                 </div>
                 <div class="bg-white">
@@ -17,10 +17,10 @@
                         <thead>
                             <tr>
                                 <th class="border px-6 py-4">No</th>
-                                <th class="border px-6 py-4">Kategori Unit</th>
-                                <th class="border px-6 py-4">Nama Product</th>
-                                <th class="border px-6 py-4">Harga</th>
+                                <th class="border px-6 py-4">Product</th>
+                                <th class="border px-6 py-4">Supplier</th>
                                 <th class="border px-6 py-4">Qty</th>
+                                <th class="border px-6 py-4">Tanggal</th>
                                 <th class="border px-6 py-4">Action</th>
                             </tr>
                         </thead>
@@ -28,16 +28,16 @@
                             @forelse ($brgmsk as $item)
                                 <tr>
                                     <td class="border px-6 py-4">{{ $loop->iteration }}</td>
-                                    <td class="border px-6 py-4">{{ $item->unit->name }}</td>
-                                    <td class="border px-6 py-4">{{ $item->nama }}</td>
-                                    <td class="border px-6 py-4">Rp. {{ number_format($item->harga) }}</td>
+                                    <td class="border px-6 py-4">{{ $item->product->nama }}</td>
+                                    <td class="border px-6 py-4">{{ $item->supplier->nama }}</td>
                                     <td class="border px-6 py-4">{{ $item->qty }}</td>
+                                    <td class="border px-6 py-4">{{ $item->tanggal }}</td>
                                     <td class="border px-6 py-4 text-center">
-                                        <a href="{{ route('product.edit', $item->id) }}"
+                                        <a href="{{ route('brgmsk.edit', $item->id) }}"
                                             class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">Edit
                                         </a>
 
-                                        <form action="{{ route('product.destroy', $item->id) }}" method="POST"
+                                        <form action="{{ route('brgmsk.destroy', $item->id) }}" method="POST"
                                             class="inline-block">
                                             {!! method_field('delete') . csrf_field() !!}
                                             <button type="submit"
@@ -61,7 +61,7 @@
 
             {{-- untuk paginate --}}
             <div class="text-center mt-5">
-                {{ $product->links() }}
+                {{ $brgmsk->links() }}
             </div>
 
         </div>

@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('brgmsk', function (Blueprint $table) {
+        Schema::create('brgmsks', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_products');
+            $table->integer('id_product');
             $table->integer('id_supplier');
             $table->date('tanggal');
+            $table->integer('qty');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('brgmsk');
+        Schema::dropIfExists('brgmsks');
     }
 };

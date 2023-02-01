@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Product;
+use App\Models\Supplier;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,15 +12,15 @@ class Brgmsk extends Model
     use HasFactory;
 
     protected $fillable = [
-       'id_products', 'id_supplier', 'tanggal'
+       'id_product', 'id_supplier', 'tanggal', 'qty'
    ];
 
-    public function Products()
+    public function product()
    {
-       return $this->hasOne(Products::class, 'id', 'id_products');
+       return $this->hasOne(Product::class, 'id', 'id_product');
    }
 
-   public function Supplier()
+   public function supplier()
    {
        return $this->hasOne(Supplier::class, 'id', 'id_supplier');
    }
