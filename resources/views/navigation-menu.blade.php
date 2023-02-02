@@ -71,11 +71,11 @@
                     </x-jet-nav-link>
                 </div>
 
-                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('customer.index') }}" :active="request()->routeIs('brgmsk.index')">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('brgkeluar.index') }}" :active="request()->routeIs('brgkeluar.index')">
                         {{ __('Barang Keluar') }}
                     </x-jet-nav-link>
-                </div> --}}
+                </div>
 
 
             </div>

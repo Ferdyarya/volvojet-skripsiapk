@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            User &raquo; {{ $item->nama }} &raquo; Edit
+            Barang Masuk &raquo; {{ $item->nama }} &raquo; Edit
         </h2>
     </x-slot>
 
@@ -26,7 +26,7 @@
                         </div>
                     </div>
                 @endif
-                <form action="{{ route('product.update', $item->id) }}" class="w-full" method="POST"
+                <form action="{{ route('brgmsk.update', $item->id) }}" class="w-full" method="POST"
                     enctype="multipart/form-data">
 
                     @csrf
