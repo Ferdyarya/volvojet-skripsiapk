@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Unit;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use PDF;
 
 class ProductController extends Controller
 {
@@ -107,5 +108,14 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('product.index');
+    }
+
+    public function exportpdf()
+    {
+    	$data = Product::all();
+
+        // view()->share('data', $data);
+    	$pdf = PDF::loadview('product/exportpdf', ['data' => $data]);
+        return $pdf->download('laporan_product.pdf');
     }
 }

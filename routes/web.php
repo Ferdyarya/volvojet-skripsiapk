@@ -43,13 +43,12 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', 'admin'])->group(functio
     Route::resource('brgmsk', BrgmskController::class);
     Route::resource('brgkeluar', BrgkeluarController::class);
 
+    // cetak PDF
+    Route::get('exportpdf', [ProductController::class, 'exportpdf'])->name('exportpdf');
+
     // update status transaction
     Route::get('tranasctions/{id}/status/{status} ', [TransactionController::class, 'changeStatus'])->name('transaction.changeStatus');
     Route::resource('transaction', TransactionController::class);
 });
 
 
-// Midtrang page
-Route::get('midtrans/success', [MidtransController::class, 'success']);
-Route::get('midtrans/unfinish', [MidtransController::class, 'unfinish']);
-Route::get('midtrans/error', [MidtransController::class, 'error']);
