@@ -12,7 +12,7 @@ class Customers extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama', 'id_product', 'id_unit', 'alamat', 'email', 'hp', 'harga', 'qty'
+        'nama', 'id_product', 'id_unit', 'alamat', 'email', 'kode', 'harga', 'qty'
     ];
 
      public function product()

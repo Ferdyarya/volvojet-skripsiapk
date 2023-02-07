@@ -11,6 +11,8 @@
                 <div class="mb-10">
                     <a href="{{ route('brgkeluar.create') }}"
                         class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Create Barang Keluar</a>
+                        <a href="{{ route('brgkeluarpdf') }}"
+                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Export PDF</a>
                 </div>
                 <div class="bg-white">
                     <table class="table-auto w-full">
@@ -18,10 +20,10 @@
                             <tr>
                                 <th class="border px-6 py-4">No</th>
                                 <th class="border px-6 py-4">Product</th>
-                                <th class="border px-6 py-4">Supplier</th>
+                                <th class="border px-6 py-4">Customer</th>
                                 <th class="border px-6 py-4">Qty</th>
                                 <th class="border px-6 py-4">Tanggal</th>
-                                <th class="border px-6 py-4">Action</th>z
+                                <th class="border px-6 py-4">Action</th>
                             </tr>
                         </thead>
                         <tbody>

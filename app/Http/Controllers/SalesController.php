@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Unit;
 use App\Models\Sales;
 use Illuminate\Http\Request;
+use PDF;
 
 class SalesController extends Controller
 {
@@ -106,5 +107,14 @@ class SalesController extends Controller
         $sales->delete();
 
         return redirect()->route('sales.index');
+    }
+
+    public function salespdf()
+    {
+    	$data = Sales::all();
+
+        // view()->share('data', $data);
+    	$pdf = PDF::loadview('sales/salespdf', ['data' => $data]);
+        return $pdf->download('laporan_sales.pdf');
     }
 }

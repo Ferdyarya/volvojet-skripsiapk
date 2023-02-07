@@ -6,6 +6,7 @@ use App\Models\Unit;
 use App\Models\Product;
 use App\Models\Customers;
 use Illuminate\Http\Request;
+use PDF;
 
 class CustomerController extends Controller
 {
@@ -112,5 +113,14 @@ class CustomerController extends Controller
         $customer->delete();
 
         return redirect()->route('customer.index');
+    }
+
+    public function customerpdf()
+    {
+    	$data = Customers::all();
+
+        // view()->share('data', $data);
+    	$pdf = PDF::loadview('customer/customerpdf', ['data' => $data]);
+        return $pdf->download('laporan_customer.pdf');
     }
 }

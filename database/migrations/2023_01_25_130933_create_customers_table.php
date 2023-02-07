@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('id_unit');
             $table->string('alamat');
             $table->string('email');
-            $table->integer('hp');
+            $table->integer('kode');
             $table->integer('harga');
             $table->integer('qty');
             $table->timestamps();

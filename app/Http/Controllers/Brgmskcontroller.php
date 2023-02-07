@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Brgmsk;
 use App\Models\Product;
 use App\Models\Supplier;
+use PDF;
 
 class Brgmskcontroller extends Controller
 {
@@ -113,6 +114,15 @@ class Brgmskcontroller extends Controller
         $brgmsk->delete();
 
         return redirect()->route('brgmsk.index');
+    }
+
+    public function brgmasukpdf()
+    {
+    	$data = Brgmsk::all();
+
+        // view()->share('data', $data);
+    	$pdf = PDF::loadview('brgmsk/brgmasukpdf', ['data' => $data]);
+        return $pdf->download('laporan_Barang_Masuk.pdf');
     }
 }
 

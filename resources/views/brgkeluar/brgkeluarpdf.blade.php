@@ -34,22 +34,22 @@
 <html>
 <head>
 <style>
-#products {
+#keluar {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
 
-#products td, #products th {
+#keluar td, #keluar th {
   border: 1px solid #ddd;
   padding: 8px;
 }
 
-#products tr:nth-child(even){background-color: #f2f2f2;}
+#keluar tr:nth-child(even){background-color: #f2f2f2;}
 
-#products tr:hover {background-color: #ddd;}
+#keluar tr:hover {background-color: #ddd;}
 
-#products th {
+#keluar th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
@@ -61,24 +61,24 @@
 <body>
 
     <center>
-    <h1 class="">Export Table Product</h1>
+    <h1 class="">Export Table Barang Keluar</h1>
     </center>
 
-<table id="products">
+<table id="keluar">
   <tr>
     <th>No</th>
-    <th>Unit</th>
-    <th>Nama Barang</th>
-    <th>Harga</th>
+    <th>Product</th>
+    <th>Csutomer</th>
     <th>Qty</th>
+    <th>Tanggal</th>
   </tr>
     @foreach ($data as $item )
     <tr>
-      <td class="border px-6 py-4">{{ $loop->iteration }}</td>
-      <td class="border px-6 py-4">{{ $item->unit->name }}</td>
-      <td class="border px-6 py-4">{{ $item->nama }}</td>
-      <td class="border px-6 py-4">Rp. {{ number_format($item->harga) }}</td>
-      <td class="border px-6 py-4">{{ $item->qty }}</td>
+        <td class="border px-6 py-4">{{ $loop->iteration }}</td>
+        <td class="border px-6 py-4">{{ $item->product->nama }}</td>
+        <td class="border px-6 py-4">{{ $item->customer->nama }}</td>
+        <td class="border px-6 py-4">{{ $item->qty }}</td>
+        <td class="border px-6 py-4">{{ $item->tanggal }}</td>
     </tr>
     @endforeach
 </table>

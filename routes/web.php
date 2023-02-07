@@ -45,6 +45,10 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', 'admin'])->group(functio
 
     // cetak PDF
     Route::get('exportpdf', [ProductController::class, 'exportpdf'])->name('exportpdf');
+    Route::get('customerpdf', [CustomerController::class, 'customerpdf'])->name('customerpdf');
+    Route::get('salespdf', [SalesController::class, 'salespdf'])->name('salespdf');
+    Route::get('brgmasukpdf', [BrgmskController::class, 'brgmasukpdf'])->name('brgmasukpdf');
+    Route::get('brgkeluarpdf', [BrgkeluarController::class, 'brgkeluarpdf'])->name('brgkeluarpdf');
 
     // update status transaction
     Route::get('tranasctions/{id}/status/{status} ', [TransactionController::class, 'changeStatus'])->name('transaction.changeStatus');

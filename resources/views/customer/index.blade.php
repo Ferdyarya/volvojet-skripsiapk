@@ -12,6 +12,8 @@
                     <a href="{{ route('customer.create') }}"
                         class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Create
                         Customer</a>
+                        <a href="{{ route('customerpdf') }}"
+                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Export PDF</a>
                 </div>
                 <div class="bg-white">
                     <table class="table-auto w-full">
@@ -21,7 +23,7 @@
                                 <th class="border px-6 py-4">Nama</th>
                                 <th class="border px-6 py-4">Kategori Unit</th>
                                 <th class="border px-6 py-4">Email</th>
-                                <th class="border px-6 py-4">HP</th>
+                                <th class="border px-6 py-4">kode</th>
                                 <th class="border px-6 py-4">Harga</th>
                                 <th class="border px-6 py-4">Qty</th>
                                 <th class="border px-6 py-4">Action</th>
@@ -34,7 +36,7 @@
                                     <td class="border px-6 py-4">{{ $item->nama }}</td>
                                     <td class="border px-6 py-4">{{ $item->unit->name }}</td>
                                     <td class="border px-6 py-4">{{ $item->email }}</td>
-                                    <td class="border px-6 py-4">{{ $item->hp }}</td>
+                                    <td class="border px-6 py-4">{{ $item->kode }}</td>
                                     <td class="border px-6 py-4">{{ number_format($item->harga) }}</td>
                                     <td class="border px-6 py-4">{{ $item->qty }}</td>
                                     <td class="border px-6 py-4 text-center">

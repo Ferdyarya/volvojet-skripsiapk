@@ -11,6 +11,8 @@
                 <div class="mb-10">
                     <a href="{{ route('brgmsk.create') }}"
                         class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Create Barang Masuk</a>
+                    <a href="{{ route('brgmasukpdf') }}"
+                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Export PDF</a>
                 </div>
                 <div class="bg-white">
                     <table class="table-auto w-full">

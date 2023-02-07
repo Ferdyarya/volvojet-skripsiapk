@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Brgkeluar;
 use App\Models\Product;
 use App\Models\Customers;
+use PDF;
 
 class BrgkeluarController extends Controller
 {
@@ -113,5 +114,14 @@ class BrgkeluarController extends Controller
         $brgkeluar->delete();
 
         return redirect()->route('brgkeluar.index');
+    }
+
+    public function brgkeluarpdf()
+    {
+    	$data = Brgkeluar::all();
+
+        // view()->share('data', $data);
+    	$pdf = PDF::loadview('brgkeluar/brgkeluarpdf', ['data' => $data]);
+        return $pdf->download('laporan_Barang_Keluar.pdf');
     }
 }
