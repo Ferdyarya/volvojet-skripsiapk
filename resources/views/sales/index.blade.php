@@ -11,7 +11,7 @@
                 <div class="mb-10">
                     <a href="{{ route('sales.create') }}"
                         class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Create sales</a>
-                        <a href="{{ route('salespdf') }}"
+                    <a href="{{ route('salespdf') }}"
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Export PDF</a>
                 </div>
                 <div class="bg-white">
@@ -29,34 +29,34 @@
                         </thead>
                         <tbody>
                             @forelse ($sales as $item)
-                                <tr>
-                                    <td class="border px-6 py-4">{{ $loop->iteration }}</td>
-                                    <td class="border px-6 py-4">{{ $item->nama }}</td>
-                                    <td class="border px-6 py-4">{{ $item->unit->name }}</td>
-                                    {{-- <td class="border px-6 py-4">{{ $item->gambar }}</td> --}}
-                                    <td class="border px-6 py-4">Rp. {{ number_format($item->harga) }}</td>
-                                    <td class="border px-6 py-4">{{ $item->qty }}</td>
-                                    <td class="border px-6 py-4 text-center">
-                                        <a href="{{ route('sales.edit', $item->id) }}"
-                                            class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">Edit
-                                        </a>
+                            <tr>
+                                <td class="border px-6 py-4">{{ $loop->iteration }}</td>
+                                <td class="border px-6 py-4">{{ $item->nama }}</td>
+                                <td class="border px-6 py-4">{{ $item->unit->name }}</td>
+                                {{-- <td class="border px-6 py-4">{{ $item->gambar }}</td> --}}
+                                <td class="border px-6 py-4">Rp. {{ number_format($item->harga) }}</td>
+                                <td class="border px-6 py-4">{{ $item->qty }}</td>
+                                <td class="border px-6 py-4 text-center">
+                                    <a href="{{ route('sales.edit', $item->id) }}"
+                                        class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">Edit
+                                    </a>
 
-                                        <form action="{{ route('sales.destroy', $item->id) }}" method="POST"
-                                            class="inline-block">
-                                            {!! method_field('delete') . csrf_field() !!}
-                                            <button type="submit"
-                                                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-2 rounded">Delete</button>
-                                        </form>
+                                    <form action="{{ route('sales.destroy', $item->id) }}" method="POST"
+                                        class="inline-block">
+                                        {!! method_field('delete') . csrf_field() !!}
+                                        <button type="submit"
+                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-2 rounded">Delete</button>
+                                    </form>
 
-                                    </td>
-                                </tr>
+                                </td>
+                            </tr>
                             @empty
 
-                                <tr>
-                                    <td colspan="6" class="border text-center p-5">
-                                        Data Tidak Di Temukan
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td colspan="6" class="border text-center p-5">
+                                    Data Tidak Di Temukan
+                                </td>
+                            </tr>
                             @endforelse
                         </tbody>
                     </table>

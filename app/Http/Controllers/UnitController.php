@@ -7,10 +7,13 @@ use Illuminate\Http\Request;
 
 class UnitController extends Controller
 {
-   public function index()
+   public function index(Request $request)
     {
-        $unit = Unit::paginate(10);
-
+        if($request->has('search')){
+            $unit = Unit::where('name', 'LIKE', '%' .$request->search.'%')->paginate(10);
+        }else{
+            $unit = Unit::paginate(10);
+        }
         return view('unit.index',[
             'unit' => $unit
         ]);

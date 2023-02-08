@@ -11,20 +11,20 @@
             <div class="">
                 {{-- handling error --}}
                 @if ($errors->any())
-                    <div class="mb-5" role="alert">
-                        <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
-                            There's something wrong
-                        </div>
-                        <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
-                            <p>
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                            </p>
-                        </div>
+                <div class="mb-5" role="alert">
+                    <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+                        There's something wrong
                     </div>
+                    <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                        <p>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        </p>
+                    </div>
+                </div>
                 @endif
                 <form action="{{ route('sales.store') }}" class="w-full" method="POST" enctype="multipart/form-data">
 
@@ -50,7 +50,7 @@
                                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 id="grid-last-name">
                                 @foreach ($unit as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>

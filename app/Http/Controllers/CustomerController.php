@@ -15,10 +15,13 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $customer = Customers::with(['unit', 'product'])->paginate(10);
-
+        if($request->has('search')){
+            $customer = Customers::where('nama', 'LIKE', '%' .$request->search.'%')->paginate(10);
+        }else{
+            $customer = Customers::with(['unit', 'product'])->paginate(10);
+        }
         return view('customer.index',[
             'customer' => $customer
         ]);

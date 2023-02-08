@@ -14,10 +14,13 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $product = Product::with(['unit'])->paginate(10);
-
+        if($request->has('search')){
+            $product = Product::where('nama', 'LIKE', '%' .$request->search.'%')->paginate(10);
+        }else{
+            $product = Product::with(['unit'])->paginate(10);
+        }
         return view('product.index',[
             'product' => $product
         ]);
