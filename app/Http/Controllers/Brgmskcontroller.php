@@ -16,10 +16,14 @@ class Brgmskcontroller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $brgmsk = Brgmsk::with(['supplier', 'product'])->paginate(10);
-
+        if($request->has('search')){
+            $brgmsk = Brgmsk::all();
+            $brgmsk = Brgmsk::where('id', 'LIKE', '%' .$request->search.'%')->paginate(10);
+        }else{
+            $brgmsk = Brgmsk::with(['supplier', 'product'])->paginate(10);
+        }
         return view('brgmsk.index',[
             'brgmsk' => $brgmsk
         ]);

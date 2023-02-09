@@ -13,10 +13,13 @@ class SalesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $sales = Sales::with(['unit'])->paginate(10);
-
+        if($request->has('search')){
+            $sales = Sales::where('nama', 'LIKE', '%' .$request->search.'%')->paginate(10);
+        }else{
+            $sales = Sales::with(['unit'])->paginate(10);
+        }
         return view('sales.index',[
             'sales' => $sales
         ]);

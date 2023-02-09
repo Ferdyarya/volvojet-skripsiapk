@@ -9,10 +9,13 @@ use Illuminate\Http\Request;
 
 class SupplierController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        if($request->has('search')){
+            $supplier = Supplier::where('nama', 'LIKE', '%' .$request->search.'%')->paginate(10);
+        }else{
         $supplier = Supplier::paginate(10);
-
+        }
         return view('supplier.index',[
             'supplier' => $supplier
         ]);

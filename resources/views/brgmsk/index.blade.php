@@ -8,12 +8,35 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="mb-10">
+                <div class="mb-3">
                     <a href="{{ route('brgmsk.create') }}"
                         class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Create Barang
                         Masuk</a>
                     <a href="{{ route('brgmasukpdf') }}"
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Export PDF</a>
+                    <div class="flex justify-start mt-7">
+                        <div class=" xl:w-96 ">
+                            <form action="brgmsk" method="GET">
+                                <input type="search" name="search" class="
+                                              form-control
+                                              block
+                                              w-full
+                                              px-3
+                                              py-1.5
+                                              text-base
+                                              font-normal
+                                              text-gray-700
+                                              bg-white bg-clip-padding
+                                              border border-solid border-gray-300
+                                              rounded
+                                              transition
+                                              ease-in-out
+                                              m-0
+                                              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                                            " id="search" placeholder="Search" />
+                            </form>
+                        </div>
+                    </div>
                 </div>
                 <div class="bg-white">
                     <table class="table-auto w-full">
