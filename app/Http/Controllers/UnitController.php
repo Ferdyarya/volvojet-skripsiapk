@@ -41,7 +41,7 @@ class UnitController extends Controller
 
         Unit::create($data);
 
-        return redirect()->route('unit.index');
+        return redirect()->route('unit.index')->with('success', 'Data Unit Sudah ditambahkan masseh!');
     }
 
     /**

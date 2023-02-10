@@ -20,12 +20,13 @@ class Brgmskcontroller extends Controller
     {
         if($request->has('search')){
             $brgmsk = Brgmsk::all();
-            $brgmsk = Brgmsk::where('id', 'LIKE', '%' .$request->search.'%')->paginate(10);
+            $brgmsk = Brgmsk::where('id_product', 'LIKE', '%' .$request->search.'%')->paginate(10);
+
         }else{
             $brgmsk = Brgmsk::with(['supplier', 'product'])->paginate(10);
         }
         return view('brgmsk.index',[
-            'brgmsk' => $brgmsk
+            'brgmsk' => $brgmsk,
         ]);
     }
 
