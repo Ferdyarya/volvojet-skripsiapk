@@ -51,7 +51,7 @@ class ProductController extends Controller
 
         Product::create($data);
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('toast_success', 'Data Product Telah ditambahkan bro');
     }
 
     /**
@@ -96,7 +96,7 @@ class ProductController extends Controller
 
         //dd($data);
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('toast_success', 'Data Product telah berubah bro');
 
     }
 

@@ -43,7 +43,7 @@ class SupplierController extends Controller
 
         Supplier::create($data);
 
-        return redirect()->route('supplier.index');
+        return redirect()->route('supplier.index')->with('toast_success', 'Data Unit Telah ditambahkan bro');
     }
 
     /**

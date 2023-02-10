@@ -57,7 +57,7 @@ class Brgmskcontroller extends Controller
 
         Brgmsk::create($data);
 
-        return redirect()->route('brgmsk.index');
+        return redirect()->route('brgmsk.index')->with('toast_success', 'Data Barang Masuk Telah ditambahkan bro');
     }
 
     /**
@@ -104,7 +104,7 @@ class Brgmskcontroller extends Controller
 
         //dd($data);
 
-        return redirect()->route('brgmsk.index');
+        return redirect()->route('brgmsk.index')->with('toast_success', 'Data Barang Masuk telah berubah bro');
 
     }
 

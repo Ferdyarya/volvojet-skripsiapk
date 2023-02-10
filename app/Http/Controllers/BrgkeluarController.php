@@ -57,7 +57,7 @@ class BrgkeluarController extends Controller
 
         Brgkeluar::create($data);
 
-        return redirect()->route('brgkeluar.index');
+        return redirect()->route('brgkeluar.index')->with('toast_success', 'Data barang Keluar Telah ditambahkan bro');
     }
 
     /**
@@ -104,7 +104,7 @@ class BrgkeluarController extends Controller
 
         //dd($data);
 
-        return redirect()->route('brgkeluar.index');
+        return redirect()->route('brgkeluar.index')->with('toast_success', 'Data Barang Keluar telah berubah bro');
 
     }
 

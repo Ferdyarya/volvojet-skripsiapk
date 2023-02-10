@@ -89,7 +89,9 @@
             <div class="text-center mt-5">
                 {{ $product->links() }}
             </div>
-
         </div>
     </div>
+
+    {{-- script --}}
+    @include('sweetalert::alert')
 </x-app-layout>

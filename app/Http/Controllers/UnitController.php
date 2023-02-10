@@ -41,7 +41,7 @@ class UnitController extends Controller
 
         Unit::create($data);
 
-        return redirect()->route('unit.index')->with('success', 'Data Unit Sudah ditambahkan masseh!');
+        return redirect()->route('unit.index')->with('toast_success', 'Data Unit Telah ditambahkan bro');
     }
 
     /**
@@ -83,7 +83,7 @@ class UnitController extends Controller
 
         //dd($data);
 
-        return redirect()->route('unit.index');
+        return redirect()->route('unit.index')->with('toast_success', 'Data Unit telah berubah bro');
 
     }
 

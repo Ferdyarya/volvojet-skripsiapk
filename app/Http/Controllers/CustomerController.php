@@ -54,7 +54,7 @@ class CustomerController extends Controller
 
         Customers::create($data);
 
-        return redirect()->route('customer.index');
+        return redirect()->route('customer.index')->with('toast_success', 'Data Csutomer Telah ditambahkan bro');
     }
 
     /**
@@ -101,7 +101,7 @@ class CustomerController extends Controller
 
         //dd($data);
 
-        return redirect()->route('customer.index');
+        return redirect()->route('customer.index')->with('toast_success', 'Data Customer telah berubah bro');
 
     }
 

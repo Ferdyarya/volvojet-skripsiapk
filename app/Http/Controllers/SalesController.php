@@ -50,7 +50,7 @@ class SalesController extends Controller
 
         Sales::create($data);
 
-        return redirect()->route('sales.index');
+        return redirect()->route('sales.index')->with('toast_success', 'Data Sales Telah ditambahkan bro');
     }
 
     /**
@@ -95,7 +95,7 @@ class SalesController extends Controller
 
         //dd($data);
 
-        return redirect()->route('sales.index');
+        return redirect()->route('sales.index')->with('toast_success', 'Data Sales telah berubah bro');;
 
     }
 
