@@ -17,7 +17,7 @@
                         <div class="flex justify-start mt-7">
                             <div class=" xl:w-96 ">
                                 <form action="brgkeluar" method="GET">
-                                    <input type="search" name="search" class="
+                                    <input type="text" name="keyword1" class="
                                                   form-control
                                                   block
                                                   w-full
@@ -33,7 +33,7 @@
                                                   ease-in-out
                                                   m-0
                                                   focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-                                                " id="search" placeholder="Search" />
+                                                " id="keyword1" placeholder="Search" />
                                 </form>
                             </div>
                         </div>

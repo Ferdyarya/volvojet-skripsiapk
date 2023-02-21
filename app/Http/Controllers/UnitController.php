@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Unit;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UnitController extends Controller
 {
@@ -96,7 +97,6 @@ class UnitController extends Controller
     public function destroy(Unit $unit)
     {
         $unit->delete();
-
-        return redirect()->route('unit.index');
+        return redirect()->route('unit.index')->with('hapus', 'Data Sudah Berhasil dihapus bro');
     }
 }

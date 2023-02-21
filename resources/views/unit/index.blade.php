@@ -85,7 +85,7 @@
 
         </div>
     </div>
-    
+
     {{-- script --}}
     @include('sweetalert::alert')
 </x-app-layout>

@@ -17,7 +17,7 @@
                     <div class="flex justify-start mt-7">
                         <div class=" xl:w-96 ">
                             <form action="brgmsk" method="GET">
-                                <input type="search" name="search" class="
+                                <input type="text" name="keyword" class="
                                               form-control
                                               block
                                               w-full
@@ -33,7 +33,7 @@
                                               ease-in-out
                                               m-0
                                               focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-                                            " id="search" placeholder="Search" />
+                                            " id="keyword" placeholder="Search" />
                             </form>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
 
             {{-- untuk paginate --}}
             <div class="text-center mt-5">
-                {{ $brgmsk->links() }}
+                {{ $brgmsk->withQueryString()->links() }}
             </div>
         </div>
     </div>

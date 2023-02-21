@@ -18,13 +18,19 @@ class BrgkeluarController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->has('search')){
-            $brgkeluar = Brgkeluar::all();
-            $brgkeluar = Brgkeluar::where('id_product', 'LIKE', '%' .$request->search.'%')->paginate(10);
+        $keyword1 = $request->keyword1;
 
-        }else{
-            $brgkeluar = Brgkeluar::with(['customer', 'product'])->paginate(10);
-        }
+        $brgkeluar = Brgkeluar::with('product')->whereHas('product', function($query) use($keyword1){
+            $query->where('nama', 'LIKE', '%'.$keyword1.'%');
+        })->paginate(10);
+
+        // if($request->has('search')){
+        //     $brgkeluar = Brgkeluar::all();
+        //     $brgkeluar = Brgkeluar::where('id_product', 'LIKE', '%' .$request->search.'%')->paginate(10);
+
+        // }else{
+        //     $brgkeluar = Brgkeluar::with(['customer', 'product'])->paginate(10);
+        // }
         return view('brgkeluar.index',[
             'brgkeluar' => $brgkeluar
         ]);
@@ -118,7 +124,7 @@ class BrgkeluarController extends Controller
     {
         $brgkeluar->delete();
 
-        return redirect()->route('brgkeluar.index');
+        return redirect()->route('brgkeluar.index')->with('toast_success', 'Data Barang Keluar telah dihapus');
     }
 
     public function brgkeluarpdf()

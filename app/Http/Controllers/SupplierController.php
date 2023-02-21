@@ -85,7 +85,7 @@ class SupplierController extends Controller
 
         //dd($data);
 
-        return redirect()->route('supplier.index');
+        return redirect()->route('supplier.index')->with('toast_success', 'Data Supplier telah dihapus');
 
     }
 

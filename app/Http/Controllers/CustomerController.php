@@ -115,7 +115,7 @@ class CustomerController extends Controller
     {
         $customer->delete();
 
-        return redirect()->route('customer.index');
+        return redirect()->route('customer.index')->with('toast_success', 'Data Customer telah dihapus');
     }
 
     public function customerpdf()

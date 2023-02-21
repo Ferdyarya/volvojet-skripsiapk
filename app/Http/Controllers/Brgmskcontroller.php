@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
+use PDF;
 use App\Models\Brgmsk;
+
 use App\Models\Product;
 use App\Models\Supplier;
-use PDF;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Brgmskcontroller extends Controller
 {
@@ -18,13 +19,32 @@ class Brgmskcontroller extends Controller
      */
     public function index(Request $request)
     {
-        if($request->has('search')){
-            $brgmsk = Brgmsk::all();
-            $brgmsk = Brgmsk::where('id_product', 'LIKE', '%' .$request->search.'%')->paginate(10);
 
-        }else{
-            $brgmsk = Brgmsk::with(['supplier', 'product'])->paginate(10);
-        }
+        $keyword = $request->keyword;
+
+        $brgmsk = Brgmsk::with('product')->whereHas('product', function($query) use($keyword){
+            $query->where('nama', 'LIKE', '%'.$keyword.'%');
+        })->paginate(10);
+
+        // if($request->keyword !=null){
+        //     $brgmsk = Brgmsk::all();
+            // $brgmsk = Brgmsk::where('brgmsks.id_product', 'LIKE', '%' .$request->search.'%')->paginate(10);
+            // $brgmsk = Brgmsk::orwhere('products.nama', 'LIKE', '%' .$request->search.'%')->paginate(10);
+            // $brgmsk = Brgmsk::orwhere('suppliers.nama', 'LIKE', '%' .$request->search.'%')->paginate(10);
+
+
+            // $brgmsk = DB::table('brgmsks')->get();
+            // $brgmsk = DB::table('products')->get();
+            // $brgmsk = DB::table('suppliers')->get();
+            // $brgmsk = $brgmsk
+            //             ->select('brgmsk.*','product.nama as productnama','supplier.nama as suppliernama')
+            //             ->join('product','product.id','brgmsk.id_product')
+            //             ->join('supplier','supplier.id','brgmsk.id_supplier')
+            //             ->get();
+
+        // }else{
+        //     $brgmsk = Brgmsk::with(['supplier', 'product'])->paginate(10);
+        // }
         return view('brgmsk.index',[
             'brgmsk' => $brgmsk,
         ]);
@@ -118,7 +138,7 @@ class Brgmskcontroller extends Controller
     {
         $brgmsk->delete();
 
-        return redirect()->route('brgmsk.index');
+        return redirect()->route('brgmsk.index')->with('toast_success', 'Data Barang Masuk telah dihapus');
     }
 
     public function brgmasukpdf()

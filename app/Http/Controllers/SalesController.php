@@ -109,7 +109,7 @@ class SalesController extends Controller
     {
         $sales->delete();
 
-        return redirect()->route('sales.index');
+        return redirect()->route('sales.index')->with('toast_success', 'Data Sales telah dihapus');
     }
 
     public function salespdf()

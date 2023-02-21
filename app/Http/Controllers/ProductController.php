@@ -110,7 +110,7 @@ class ProductController extends Controller
     {
         $product->delete();
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('toast_success', 'Data Product telah dihapus');
     }
 
     public function exportpdf()
