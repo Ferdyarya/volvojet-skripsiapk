@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->integer('qty');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

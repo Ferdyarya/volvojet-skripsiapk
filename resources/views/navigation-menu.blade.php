@@ -23,20 +23,6 @@
                     </x-jet-nav-link>
                 </div>
 
-                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('food.index') }}" :active="request()->routeIs('food.index')">
-                        {{ __('Food') }}
-                    </x-jet-nav-link>
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('transaction.index') }}" :active="request()->routeIs('transaction.index')">
-                        {{ __('Transaction') }}
-                    </x-jet-nav-link>
-                </div> --}}
-
-                
-
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('unit.index') }}" :active="request()->routeIs('unit.index')">
                         {{ __('Unit') }}
@@ -76,6 +62,24 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('brgkeluar.index') }}" :active="request()->routeIs('brgkeluar.index')">
                         {{ __('Barang Keluar') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('custorder.index') }}" :active="request()->routeIs('custorder.index')">
+                        {{ __('Customers Order') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('custorder.index') }}" :active="request()->routeIs('custorder.index')">
+                        {{ __('Transfer Order') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('custorder.index') }}" :active="request()->routeIs('custorder.index')">
+                        {{ __('Delivery Note') }}
                     </x-jet-nav-link>
                 </div>
 

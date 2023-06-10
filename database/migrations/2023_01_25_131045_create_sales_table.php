@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('harga');
             $table->integer('qty');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

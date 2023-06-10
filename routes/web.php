@@ -13,6 +13,7 @@ use App\Http\Controllers\BrgkeluarController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\API\MidtransController;
+use App\Http\Controllers\CustorderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,7 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', 'admin'])->group(functio
     Route::resource('supplier', SupplierController::class);
     Route::resource('brgmsk', BrgmskController::class);
     Route::resource('brgkeluar', BrgkeluarController::class);
+    Route::resource('custorder', CustorderController::class);
 
     // cetak PDF
     Route::get('exportpdf', [ProductController::class, 'exportpdf'])->name('exportpdf');
@@ -49,6 +51,7 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', 'admin'])->group(functio
     Route::get('salespdf', [SalesController::class, 'salespdf'])->name('salespdf');
     Route::get('brgmasukpdf', [BrgmskController::class, 'brgmasukpdf'])->name('brgmasukpdf');
     Route::get('brgkeluarpdf', [BrgkeluarController::class, 'brgkeluarpdf'])->name('brgkeluarpdf');
+    Route::get('custorderpdf', [CustorderController::class, 'custorderpdf'])->name('custorderpdf');
 
     // update status transaction
     Route::get('tranasctions/{id}/status/{status} ', [TransactionController::class, 'changeStatus'])->name('transaction.changeStatus');

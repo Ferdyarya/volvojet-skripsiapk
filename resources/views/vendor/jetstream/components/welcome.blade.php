@@ -8,7 +8,7 @@
 
     <div class="p-6 border-t border-gray-200 md:border-l">
         <div class="flex items-center">
-            <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold"><a href="{{ route('supplier.index') }}">Suppliers</a>
+            <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold"><a href="{{ route('product.index') }}">Product</a>
             </div>
         </div>
     </div>
@@ -22,10 +22,34 @@
 
     <div class="p-6 border-t border-gray-200 md:border-l">
         <div class="flex items-center">
-
-            <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold"><a href="#">Profile</a></div>
+            <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold"><a href="{{ route('customer.index') }}">Customers</a>
+            </div>
         </div>
+    </div>
 
+    <div class="p-6 border-t border-gray-200 md:border-l">
+        <div class="flex items-center">
+            <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold"><a href="{{ route('sales.index') }}">Sales</a>
+            </div>
+        </div>
+    </div>
 
+    <div class="p-6 border-t border-gray-200 md:border-l">
+        <div class="flex items-center">
+            <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold"><a href="{{ route('brgmsk.index') }}">Barang Masuk</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="p-6 border-t border-gray-200 md:border-l">
+        <div class="flex items-center">
+            <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold"><a href="{{ route('supplier.index') }}">Suppliers</a></div>
+        </div>
+    </div>
+    <div class="p-6 border-t border-gray-200 md:border-l">
+        <div class="flex items-center">
+            <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold"><a href="{{ route('brgkeluar.index') }}">Barang Keluar</a>
+            </div>
+        </div>
     </div>
 </div>

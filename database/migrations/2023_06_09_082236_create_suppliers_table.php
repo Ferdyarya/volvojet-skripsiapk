@@ -13,13 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('brgkeluars', function (Blueprint $table) {
+        Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_product');
-            $table->integer('id_customer');
-            $table->date('tanggal');
+            $table->string('nama');
+            $table->string('produk');
+            $table->string('alamat');
+            $table->string('email');
+            $table->integer('kode');
             $table->integer('qty');
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 
@@ -30,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('brgkeluar');
+        Schema::dropIfExists('supplier');
     }
 };
