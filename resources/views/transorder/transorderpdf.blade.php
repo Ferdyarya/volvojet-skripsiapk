@@ -39,27 +39,27 @@
 
 <head>
     <style>
-        #custorder {
+        #transorder {
             font-family: Arial, Helvetica, sans-serif;
             border-collapse: collapse;
             width: 100%;
         }
 
-        #custorder td,
-        #custorder th {
+        #transorder td,
+        #transorder th {
             border: 1px solid #ddd;
             padding: 8px;
         }
 
-        #custorder tr:nth-child(even) {
+        #transorder tr:nth-child(even) {
             background-color: #f2f2f2;
         }
 
-        #custorder tr:hover {
+        #transorder tr:hover {
             background-color: #ddd;
         }
 
-        #custorder th {
+        #transorder th {
             padding-top: 12px;
             padding-bottom: 12px;
             text-align: left;
@@ -72,10 +72,10 @@
 <body>
 
     <center>
-        <h1 class="">Export Table Customer Orders</h1>
+        <h1 class="">Export Table Customer</h1>
     </center>
 
-    <table id="custorder">
+    <table id="transorder">
         <tr>
             <th>No</th>
             <th>Product</th>
@@ -87,8 +87,7 @@
         @foreach ($data as $item )
         <tr>
             <td class="border px-6 py-4">{{ $loop->iteration }}</td>
-            <td class="border px-6 py-4">{{ $item->namacust }}</td>
-            <td class="border px-6 py-4">{{ $item->product->nama }}</td>
+            <td class="border px-6 py-4">{{ $item->nama }}</td>
             <td class="border px-6 py-4">{{ $item->wo }}</td>
             <td class="border px-6 py-4">{{ $item->qty }}</td>
             <td class="border px-6 py-4">{{ $item->tanggal }}</td>

@@ -10,7 +10,6 @@ use PDF;
 
 class CustorderController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -73,12 +72,13 @@ class CustorderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Custorder $product)
+    public function edit(Custorder $custorder)
     {
-        $product = Custorder::all();
+        $product = Product::all();
 
         return view('custorder.edit', [
-            'item' => $product,
+            'item' => $custorder,
+            'product' => $product
         ]);
     }
 
@@ -114,7 +114,7 @@ class CustorderController extends Controller
         return redirect()->route('custorder.index')->with('toast_success', 'Data custorder telah dihapus');
     }
 
-    public function exportpdf()
+    public function custorderpdf()
     {
     	$data = Custorder::all();
 

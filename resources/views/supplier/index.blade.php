@@ -42,11 +42,9 @@
                             <tr>
                                 <th class="border px-6 py-4">No</th>
                                 <th class="border px-6 py-4">Nama Supplier</th>
-                                <th class="border px-6 py-4">Product</th>
                                 <th class="border px-6 py-4">Alamat</th>
                                 <th class="border px-6 py-4">Email</th>
                                 <th class="border px-6 py-4">kode</th>
-                                <th class="border px-6 py-4">Qty</th>
                                 <th class="border px-6 py-4">Action</th>
                             </tr>
                         </thead>
@@ -55,11 +53,9 @@
                             <tr>
                                 <td class="border px-6 py-4">{{ $loop->iteration }}</td>
                                 <td class="border px-6 py-4">{{ $item->nama }}</td>
-                                <td class="border px-6 py-4">{{ $item->produk }}</td>
                                 <td class="border px-6 py-4">{{ $item->alamat }}</td>
                                 <td class="border px-6 py-4">{{ $item->email }}</td>
                                 <td class="border px-6 py-4">{{ $item->kode }}</td>
-                                <td class="border px-6 py-4">{{ $item->qty }}</td>
                                 <td class="border px-6 py-4 text-center">
                                     <a href="{{ route('supplier.edit', $item->id) }}"
                                         class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">Edit

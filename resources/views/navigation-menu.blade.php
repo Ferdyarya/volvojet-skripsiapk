@@ -23,9 +23,16 @@
                     </x-jet-nav-link>
                 </div>
 
+
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('unit.index') }}" :active="request()->routeIs('unit.index')">
                         {{ __('Unit') }}
+                    </x-jet-nav-link>
+                </div>
+                
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('sales.index') }}" :active="request()->routeIs('sales.index')">
+                        {{ __('Sales') }}
                     </x-jet-nav-link>
                 </div>
 
@@ -41,11 +48,6 @@
                     </x-jet-nav-link>
                 </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('sales.index') }}" :active="request()->routeIs('sales.index')">
-                        {{ __('Sales') }}
-                    </x-jet-nav-link>
-                </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('supplier.index') }}" :active="request()->routeIs('supplier.index')">
@@ -72,13 +74,13 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('custorder.index') }}" :active="request()->routeIs('custorder.index')">
+                    <x-jet-nav-link href="{{ route('transorder.index') }}" :active="request()->routeIs('transorder.index')">
                         {{ __('Transfer Order') }}
                     </x-jet-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('custorder.index') }}" :active="request()->routeIs('custorder.index')">
+                    <x-jet-nav-link href="{{ route('delivenote.index') }}" :active="request()->routeIs('delivenote.index')">
                         {{ __('Delivery Note') }}
                     </x-jet-nav-link>
                 </div>

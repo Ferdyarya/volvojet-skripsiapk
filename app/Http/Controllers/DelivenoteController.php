@@ -1,17 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Product;
-use App\Models\Customers;
-use App\Models\Custorder;
-use App\Models\Transorder;
 
-
-use App\Models\DeliveryNote;
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\Transorder;
+use App\Models\Custorder;
+use App\Models\Customers;
+use App\Models\DeliveryNote;
 use PDF;
 
-class DeliverynoteController extends Controller
+class DelivenoteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,12 +20,12 @@ class DeliverynoteController extends Controller
     public function index(Request $request)
     {
         if($request->has('search')){
-            $deliverynote = DeliveryNote::where('nama', 'LIKE', '%' .$request->search.'%')->paginate(10);
+            $delivenote = DeliveryNote::where('nama', 'LIKE', '%' .$request->search.'%')->paginate(10);
         }else{
-            $deliverynote = DeliveryNote::with(['custorder', 'transorder','customer','product'])->paginate(10);
+            $delivenote = DeliveryNote::with(['custorder', 'transorder','customer','product'])->paginate(10);
         }
-        return view('deliverynote.index',[
-            'deliverynote' => $deliverynote
+        return view('delivenote.index',[
+            'delivenote' => $delivenote
         ]);
     }
 
@@ -41,7 +40,7 @@ class DeliverynoteController extends Controller
        $customer = Customers::all();
        $transorder = Transorder::all();
        $product = Product::all();
-        return view('deliverynote.create', [
+        return view('delivenote.create', [
             'customer' => $customer,
             'product' => $product,
             'transorder' => $transorder,
@@ -61,7 +60,7 @@ class DeliverynoteController extends Controller
 
         DeliveryNote::create($data);
 
-        return redirect()->route('customer.index')->with('toast_success', 'Data deliverynote Telah ditambahkan bro');
+        return redirect()->route('delivenote.index')->with('toast_success', 'Data delivenote Telah ditambahkan bro');
     }
 
     /**
@@ -81,15 +80,15 @@ class DeliverynoteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(DeliveryNote $deliverynote)
+    public function edit(DeliveryNote $delivenote)
     {
         $custorder = Custorder::all();
        $customer = Customers::all();
        $transorder = Transorder::all();
        $product = Product::all();
 
-        return view('deliverynote.edit', [
-            'item' => $deliverynote,
+        return view('delivenote.edit', [
+            'item' => $delivenote,
             'customer' => $customer,
             'product' => $product,
             'transorder' => $transorder,
@@ -104,15 +103,15 @@ class DeliverynoteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DeliveryNote $deliverynote)
+    public function update(Request $request, DeliveryNote $delivenote)
     {
         $data = $request->all();
 
-        $deliverynote->update($data);
+        $delivenote->update($data);
 
         //dd($data);
 
-        return redirect()->route('customer.index')->with('toast_success', 'Data deliverynote telah berubah bro');
+        return redirect()->route('delivenote.index')->with('toast_success', 'Data delivenote telah berubah bro');
 
     }
 
@@ -122,19 +121,20 @@ class DeliverynoteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DeliveryNote $deliverynote)
+    public function destroy(DeliveryNote $delivenote)
     {
-        $deliverynote->delete();
+        $delivenote->delete();
 
-        return redirect()->route('customer.index')->with('toast_success', 'Data deliverynote telah dihapus');
+        return redirect()->route('delivenote.index')->with('toast_success', 'Data delivenote telah dihapus');
     }
 
-    public function customerpdf()
+    public function delivenotepdf()
     {
     	$data = DeliveryNote::all();
 
         // view()->share('data', $data);
-    	$pdf = PDF::loadview('DeliveryNote/DeliveryNotepdf', ['data' => $data]);
-        return $pdf->download('laporan_DeliveryNote.pdf');
+    	$pdf = PDF::loadview('delivenote/delivenotepdf', ['data' => $data]);
+        return $pdf->download('laporan_delivenote.pdf');
     }
 }
+

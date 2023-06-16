@@ -39,27 +39,27 @@
 
 <head>
     <style>
-        #custorder {
+        #delivenote {
             font-family: Arial, Helvetica, sans-serif;
             border-collapse: collapse;
             width: 100%;
         }
 
-        #custorder td,
-        #custorder th {
+        #delivenote td,
+        #delivenote th {
             border: 1px solid #ddd;
             padding: 8px;
         }
 
-        #custorder tr:nth-child(even) {
+        #delivenote tr:nth-child(even) {
             background-color: #f2f2f2;
         }
 
-        #custorder tr:hover {
+        #delivenote tr:hover {
             background-color: #ddd;
         }
 
-        #custorder th {
+        #delivenote th {
             padding-top: 12px;
             padding-bottom: 12px;
             text-align: left;
@@ -72,25 +72,23 @@
 <body>
 
     <center>
-        <h1 class="">Export Table Customer Orders</h1>
+        <h1 class="">Export Table Delivery Note</h1>
     </center>
 
-    <table id="custorder">
+    <table id="delivenote">
         <tr>
             <th>No</th>
-            <th>Product</th>
             <th>WO</th>
+            <th>Customer Yang Order</th>
             <th>qty</th>
-            <th>harga</th>
             <th>tanggal</th>
         </tr>
         @foreach ($data as $item )
         <tr>
             <td class="border px-6 py-4">{{ $loop->iteration }}</td>
-            <td class="border px-6 py-4">{{ $item->namacust }}</td>
-            <td class="border px-6 py-4">{{ $item->product->nama }}</td>
-            <td class="border px-6 py-4">{{ $item->wo }}</td>
-            <td class="border px-6 py-4">{{ $item->qty }}</td>
+            <td class="border px-6 py-4">{{ $item->custorder->wo }}</td>
+            <td class="border px-6 py-4">{{ $item->custorder->namacust }}</td>
+            <td class="border px-6 py-4">{{ $item->custorder->qty }}</td>
             <td class="border px-6 py-4">{{ $item->tanggal }}</td>
         </tr>
         @endforeach

@@ -9,7 +9,7 @@ class Transorder extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id_product', 'id_customer', 'tanggal', 'qty','wo','status'
+        'id_product', 'id_customer', 'tanggal', 'qty','wo'
     ];
 
      public function product()

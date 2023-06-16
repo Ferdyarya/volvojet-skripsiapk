@@ -5,7 +5,7 @@ use App\Models\Product;
 use App\Models\Customers;
 use App\Models\Transorder;
 use Illuminate\Http\Request;
-use pdf;
+use PDF;
 
 
 class TransorderController extends Controller
@@ -17,13 +17,15 @@ class TransorderController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->has('search')){
-            $transorder = Transorder::where('nama', 'LIKE', '%' .$request->search.'%')->paginate(10);
-        }else{
-            $transorder = Transorder::with(['unit', 'product'])->paginate(10);
-        }
+
+        $keyword = $request->keyword;
+
+        $transorder = Transorder::with('product')->whereHas('product', function($query) use($keyword){
+            $query->where('nama', 'LIKE', '%'.$keyword.'%');
+        })->paginate(10);
+
         return view('transorder.index',[
-            'transorder' => $transorder
+            'transorder' => $transorder,
         ]);
     }
 
@@ -34,10 +36,10 @@ class TransorderController extends Controller
      */
     public function create()
     {
-       $customers = Customers::all();
+       $customer = Customers::all();
        $product = Product::all();
         return view('transorder.create', [
-            'customers' => $customers,
+            'customer' => $customer,
             'product' => $product,
         ]);
     }
@@ -54,7 +56,7 @@ class TransorderController extends Controller
 
         Transorder::create($data);
 
-        return redirect()->route('Transorder.index')->with('toast_success', 'Data Transorder Telah ditambahkan bro');
+        return redirect()->route('transorder.index')->with('toast_success', 'Data transorder Telah ditambahkan bro');
     }
 
     /**
@@ -76,13 +78,12 @@ class TransorderController extends Controller
      */
     public function edit(Transorder $transorder)
     {
-        $transorder = Transorder::all();
+        $customer = Customers::all();
         $product = Product::all();
-        $customers = Customers::all();
 
-        return view('customer.edit', [
+        return view('transorder.edit', [
             'item' => $transorder,
-            'customers' => $customers,
+            'customer' => $customer,
             'product' => $product
         ]);
     }
@@ -116,15 +117,15 @@ class TransorderController extends Controller
     {
         $transorder->delete();
 
-        return redirect()->route('customer.index')->with('toast_success', 'Data transorder telah dihapus');
+        return redirect()->route('transorder.index')->with('toast_success', 'Data transorder telah dihapus');
     }
 
-    public function customerpdf()
+    public function transorderpdf()
     {
-    	$data = Customers::all();
+    	$data = Transorder::all();
 
         // view()->share('data', $data);
-    	$pdf = PDF::loadview('transorderpdf/transorderpdf', ['data' => $data]);
-        return $pdf->download('laporan_transorderpdf.pdf');
+    	$pdf = PDF::loadview('transorder/transorderpdf', ['data' => $data]);
+        return $pdf->download('laporan_transorder.pdf');
     }
 }

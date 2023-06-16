@@ -24,13 +24,6 @@ class BrgkeluarController extends Controller
             $query->where('nama', 'LIKE', '%'.$keyword1.'%');
         })->paginate(10);
 
-        // if($request->has('search')){
-        //     $brgkeluar = Brgkeluar::all();
-        //     $brgkeluar = Brgkeluar::where('id_product', 'LIKE', '%' .$request->search.'%')->paginate(10);
-
-        // }else{
-        //     $brgkeluar = Brgkeluar::with(['customer', 'product'])->paginate(10);
-        // }
         return view('brgkeluar.index',[
             'brgkeluar' => $brgkeluar
         ]);

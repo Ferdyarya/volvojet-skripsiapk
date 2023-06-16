@@ -22,13 +22,13 @@ class DeliveryNote extends Model
         return $this->hasOne(Customers::class, 'id', 'id_customer');
     }
 
-    public function customerorder()
+    public function custorder()
     {
-        return $this->hasOne(Customer_order::class, 'id', 'id_customer');
+        return $this->hasOne(Custorder::class, 'id', 'id_customer');
     }
 
-    public function transferoder()
+    public function transorder()
     {
-        return $this->hasOne(Transfer_order::class, 'id', 'id_customer');
+        return $this->hasOne(Transorder::class, 'id', 'id_customer');
     }
 }

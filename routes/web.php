@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Transorder;
+use App\Models\DeliveryNote;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\UnitController;
@@ -10,10 +12,12 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\BrgkeluarController;
+use App\Http\Controllers\CustorderController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DelivenoteController;
+use App\Http\Controllers\TransorderController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\API\MidtransController;
-use App\Http\Controllers\CustorderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +48,8 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', 'admin'])->group(functio
     Route::resource('brgmsk', BrgmskController::class);
     Route::resource('brgkeluar', BrgkeluarController::class);
     Route::resource('custorder', CustorderController::class);
+    Route::resource('transorder', TransorderController::class);
+    Route::resource('delivenote', DelivenoteController::class);
 
     // cetak PDF
     Route::get('exportpdf', [ProductController::class, 'exportpdf'])->name('exportpdf');
@@ -52,6 +58,8 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', 'admin'])->group(functio
     Route::get('brgmasukpdf', [BrgmskController::class, 'brgmasukpdf'])->name('brgmasukpdf');
     Route::get('brgkeluarpdf', [BrgkeluarController::class, 'brgkeluarpdf'])->name('brgkeluarpdf');
     Route::get('custorderpdf', [CustorderController::class, 'custorderpdf'])->name('custorderpdf');
+    Route::get('transorderpdf', [TransorderController::class, 'transorderpdf'])->name('transorderpdf');
+    Route::get('delivenotepdf', [DelivenoteController::class, 'delivenotepdf'])->name('delivenotepdf');
 
     // update status transaction
     Route::get('tranasctions/{id}/status/{status} ', [TransactionController::class, 'changeStatus'])->name('transaction.changeStatus');

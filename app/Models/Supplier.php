@@ -11,7 +11,7 @@ class Supplier extends Model
 
     protected $table = 'suppliers';
     protected $fillable = [
-        'nama', 'produk', 'alamat', 'email', 'kode', 'qty'
+        'nama', 'alamat', 'email', 'kode'
     ];
 
     //  public function product()

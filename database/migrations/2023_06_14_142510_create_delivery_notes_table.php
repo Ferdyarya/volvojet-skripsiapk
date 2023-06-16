@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('deliverynote', function (Blueprint $table) {
+        Schema::create('delivery_notes', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_product');
-            $table->integer('id_customer');
-            $table->integer('id_custorder');
-            $table->integer('id_transorder');
-            $table->integer('qty');
-            $table->integer('wo');
+            $table->integer("id_custorder");
+            $table->integer("id_product");
             $table->date('tanggal');
             $table->timestamps();
             $table->softDeletes();
@@ -34,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('deliverynote');
+        Schema::dropIfExists('delivery_notes');
     }
 };

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            ustorder &raquo; {{ $item->nama }} &raquo; Edit
+            Customers &raquo; {{ $item->nama }} &raquo; Edit
         </h2>
     </x-slot>
 
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 @endif
-                <form action="{{ route('custorder.update', $item->id) }}" class="w-full" method="POST"
+                <form action="{{ route('customer.update', $item->id) }}" class="w-full" method="POST"
                     enctype="multipart/form-data">
 
                     @csrf
@@ -35,10 +35,10 @@
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                for="grid-last-name">Nama Customer</label>
+                                for="grid-last-name">Nama</label>
                             <input value="{{ old('namacust') }}" name="namacust"
                                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                id="grid-last-name" type="text" placeholder="customer order">
+                                id="grid-last-name" type="text" placeholder="Name Customers">
                         </div>
                     </div>
 
@@ -92,7 +92,7 @@
                         <div class="w-full px-3 text-right">
                             <button type="submit"
                                 class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                                Update Customer Orders
+                                Update Transfer Order
                             </button>
                         </div>
                     </div>

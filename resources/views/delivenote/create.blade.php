@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            ustorder &raquo; {{ $item->nama }} &raquo; Edit
+            {!! __('delivenote &raquo; Create') !!}
         </h2>
     </x-slot>
 
@@ -26,37 +26,9 @@
                     </div>
                 </div>
                 @endif
-                <form action="{{ route('custorder.update', $item->id) }}" class="w-full" method="POST"
-                    enctype="multipart/form-data">
+                <form action="{{ route('delivenote.store') }}" class="w-full" method="POST" enctype="multipart/form-data">
 
                     @csrf
-                    @method('PUT')
-
-                    <div class="flex flex-wrap -mx-3 mb-6">
-                        <div class="w-full px-3">
-                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                for="grid-last-name">Nama Customer</label>
-                            <input value="{{ old('namacust') }}" name="namacust"
-                                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                id="grid-last-name" type="text" placeholder="customer order">
-                        </div>
-                    </div>
-
-                    <div class="flex flex-wrap -mx-3 mb-6">
-                        <div class="w-full px-3">
-                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                for="grid-last-name">
-                                Kategori Product
-                            </label>
-                            <select name="id_product"
-                                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                id="grid-last-name">
-                                @foreach ($product as $item)
-                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
 
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3">
@@ -71,10 +43,50 @@
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                for="grid-last-name">QTY</label>
-                            <input value="{{ old('qty') }}" name="qty"
+                                for="grid-last-name">
+                                Customer
+                            </label>
+                            <select name="id_custorder"
                                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                id="grid-last-name" type="number" placeholder="QTY">
+                                id="grid-last-name">
+                                @foreach ($custorder as $item)
+                                <option value="{{ $item->id }}">{{ $item->namacust }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full px-3">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                for="grid-last-name">
+                                Product
+                            </label>
+                            <select name="id_custorder"
+                                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                id="grid-last-name">
+                                @foreach ($custorder as $item)
+                                <option value="{{ $item->id }}">{{ $item->id_product }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+
+
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full px-3">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                for="grid-last-name">
+                                QTY
+                            </label>
+                            <select name="id_custorder"
+                                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                id="grid-last-name">
+                                @foreach ($custorder as $item)
+                                <option value="{{ $item->id }}">{{ $item->qty }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 
@@ -92,7 +104,7 @@
                         <div class="w-full px-3 text-right">
                             <button type="submit"
                                 class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                                Update Customer Orders
+                                Save Delivery Note
                             </button>
                         </div>
                     </div>
