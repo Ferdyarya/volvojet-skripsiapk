@@ -36,7 +36,9 @@ Route::get('/', function () {
 });
 
 // dashboard
-Route::prefix('dashboard')->middleware(['auth:sanctum', 'admin'])->group(function() {
+Route::prefix('dashboard')->middleware(['auth:sanctum', 'admin'])->group(function()
+
+{
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('users', UsersController::class);
     Route::resource('food', FoodController::class);
