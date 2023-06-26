@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            ustorder &raquo; {{ $item->nama }} &raquo; Edit
+            Customer Order &raquo; {{ $item->nama }} &raquo; Edit
         </h2>
     </x-slot>
 

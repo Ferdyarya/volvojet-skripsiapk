@@ -8,6 +8,6 @@ class DashboardController extends Controller
 {
     public function index(Request $request)
     {
-        return view('resources.layouts.admin');
+        return view('dashboard');
     }
 }

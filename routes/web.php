@@ -1,7 +1,10 @@
 <?php
 
+use App\Models\Partretur;
 use App\Models\Transorder;
+use App\Models\Salesmaster;
 use App\Models\DeliveryNote;
+use App\Models\Customermaster;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\UnitController;
@@ -14,10 +17,12 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\BrgkeluarController;
 use App\Http\Controllers\CustorderController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DelivenoteController;
+use App\Http\Controllers\PartreturController;
 use App\Http\Controllers\TransorderController;
+use App\Http\Controllers\SalesmasterController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\API\MidtransController;
+use App\Http\Controllers\CustomermasterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,7 +56,9 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', 'admin'])->group(functio
     Route::resource('brgkeluar', BrgkeluarController::class);
     Route::resource('custorder', CustorderController::class);
     Route::resource('transorder', TransorderController::class);
-    Route::resource('delivenote', DelivenoteController::class);
+    Route::resource('partretur', PartreturController::class);
+    Route::resource('customermaster', CustomermasterController::class);
+    Route::resource('salesmaster', SalesmasterController::class);
 
     // cetak PDF
     Route::get('exportpdf', [ProductController::class, 'exportpdf'])->name('exportpdf');
@@ -61,7 +68,7 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', 'admin'])->group(functio
     Route::get('brgkeluarpdf', [BrgkeluarController::class, 'brgkeluarpdf'])->name('brgkeluarpdf');
     Route::get('custorderpdf', [CustorderController::class, 'custorderpdf'])->name('custorderpdf');
     Route::get('transorderpdf', [TransorderController::class, 'transorderpdf'])->name('transorderpdf');
-    Route::get('delivenotepdf', [DelivenoteController::class, 'delivenotepdf'])->name('delivenotepdf');
+    Route::get('partreturpdf', [PartreturController::class, 'partreturpdf'])->name('partreturpdf');
 
     // update status transaction
     Route::get('tranasctions/{id}/status/{status} ', [TransactionController::class, 'changeStatus'])->name('transaction.changeStatus');
