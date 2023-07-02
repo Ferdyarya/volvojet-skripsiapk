@@ -76,4 +76,13 @@ class User extends Authenticatable
         return Carbon::parse($value)->timestamp;
     }
 
+    public function hakakses($roles) {
+        if ($this->roles === $roles){
+            return true;
+        }
+        return false;
+    }
+
+
 }
+

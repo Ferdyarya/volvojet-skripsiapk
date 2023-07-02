@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            User &raquo; {{ $item->nama }} &raquo; Edit
+            Penjualan Sales &raquo; {{ $item->nama }} &raquo; Edit
         </h2>
     </x-slot>
 
@@ -35,10 +35,16 @@
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                for="grid-last-name">Nama Sales</label>
-                            <input value="{{ old('nama') ?? $item->nama }}" name="nama"
+                                for="grid-last-name">
+                                Nama Sales
+                            </label>
+                            <select name="id_salesmaster"
                                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                id="grid-last-name" type="text" placeholder="Nama sales">
+                                id="grid-last-name">
+                                @foreach ($salesmaster as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 
@@ -91,10 +97,20 @@
                     </div>
 
                     <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full px-3">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                for="grid-last-name">Tanggal</label>
+                            <input value="{{ old('tanggal') ?? $item->tanggal }}" name="tanggal"
+                                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                id="grid-last-name" type="date" placeholder="Tanggal">
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3 text-right">
                             <button type="submit"
                                 class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                                Update User
+                                Update Penjualan Sales
                             </button>
                         </div>
                     </div>

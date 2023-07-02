@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Unit;
 use App\Models\Sales;
+use App\Models\Salesmaster;
 use Illuminate\Http\Request;
 use PDF;
 
@@ -18,7 +19,7 @@ class SalesController extends Controller
         if($request->has('search')){
             $sales = Sales::where('nama', 'LIKE', '%' .$request->search.'%')->paginate(10);
         }else{
-            $sales = Sales::with(['unit'])->paginate(10);
+            $sales = Sales::with(['unit', 'salesmaster'])->paginate(10);
         }
         return view('sales.index',[
             'sales' => $sales
@@ -33,8 +34,10 @@ class SalesController extends Controller
     public function create()
     {
        $unit = Unit::all();
+       $salesmaster = Salesmaster::all();
         return view('sales.create', [
             'unit' => $unit,
+            'salesmaster' => $salesmaster,
         ]);
     }
 
@@ -50,7 +53,7 @@ class SalesController extends Controller
 
         Sales::create($data);
 
-        return redirect()->route('sales.index')->with('toast_success', 'Data Sales Telah ditambahkan bro');
+        return redirect()->route('sales.index')->with('toast_success', 'Data Penjualan Sales Service Telah ditambahkan bro');
     }
 
     /**
@@ -70,13 +73,15 @@ class SalesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sales $sales)
+    public function edit($id)
     {
         $unit = Unit::all();
+        $salesmaster = Salesmaster::all();
 
         return view('sales.edit', [
-            'item' => $sales,
-            'unit' => $unit
+            'item' => Sales::find($id),
+            'unit' => $unit,
+            'salesmaster' => $salesmaster
         ]);
     }
 
@@ -87,15 +92,15 @@ class SalesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sales $sales)
+    public function update(Request $request, $id)
     {
         $data = $request->all();
-
+        $sales = Sales::find($id);
         $sales->update($data);
 
         //dd($data);
 
-        return redirect()->route('sales.index')->with('toast_success', 'Data Sales telah berubah bro');;
+        return redirect()->route('sales.index')->with('toast_success', 'Data Penjualan Sales telah berubah bro');
 
     }
 
@@ -105,11 +110,12 @@ class SalesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sales $sales)
+    public function destroy($id)
     {
+        $sales = Sales::find($id);
         $sales->delete();
 
-        return redirect()->route('sales.index')->with('toast_success', 'Data Sales telah dihapus');
+        return redirect()->route('sales.index')->with('toast_success', 'Data Penjualan Sales telah dihapus');
     }
 
     public function salespdf()

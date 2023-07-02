@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Unit;
-use App\Models\Product;
+use App\Models\Customermaster;
 use App\Models\Customers;
 use Illuminate\Http\Request;
 use PDF;
@@ -20,7 +20,7 @@ class CustomerController extends Controller
         if($request->has('search')){
             $customer = Customers::where('nama', 'LIKE', '%' .$request->search.'%')->paginate(10);
         }else{
-            $customer = Customers::with(['unit', 'product'])->paginate(10);
+            $customer = Customers::with(['unit', 'customermaster'])->paginate(10);
         }
         return view('customer.index',[
             'customer' => $customer
@@ -35,10 +35,10 @@ class CustomerController extends Controller
     public function create()
     {
        $unit = Unit::all();
-       $product = Product::all();
+       $customermaster = Customermaster::all();
         return view('customer.create', [
             'unit' => $unit,
-            'product' => $product,
+            'customermaster' => $customermaster,
         ]);
     }
 
@@ -54,7 +54,7 @@ class CustomerController extends Controller
 
         Customers::create($data);
 
-        return redirect()->route('customer.index')->with('toast_success', 'Data Csutomer Telah ditambahkan bro');
+        return redirect()->route('customer.index')->with('toast_success', 'Data Customer Service Telah ditambahkan bro');
     }
 
     /**
@@ -77,12 +77,12 @@ class CustomerController extends Controller
     public function edit(Customers $customer)
     {
         $unit = Unit::all();
-        $product = Product::all();
+        $customermaster = Customermaster::all();
 
         return view('customer.edit', [
             'item' => $customer,
             'unit' => $unit,
-            'product' => $product
+            'customermaster' => $customermaster
         ]);
     }
 
@@ -101,7 +101,7 @@ class CustomerController extends Controller
 
         //dd($data);
 
-        return redirect()->route('customer.index')->with('toast_success', 'Data Customer telah berubah bro');
+        return redirect()->route('customer.index')->with('toast_success', 'Data Customer Service telah berubah bro');
 
     }
 
@@ -115,7 +115,7 @@ class CustomerController extends Controller
     {
         $customer->delete();
 
-        return redirect()->route('customer.index')->with('toast_success', 'Data Customer telah dihapus');
+        return redirect()->route('customer.index')->with('toast_success', 'Data Customer Service telah dihapus');
     }
 
     public function customerpdf()

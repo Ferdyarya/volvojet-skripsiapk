@@ -72,7 +72,7 @@
 <body>
 
     <center>
-        <h1 class="">Export Table Sales</h1>
+        <h1 class="">Export Table Penjualan Sales</h1>
     </center>
 
     <table id="sales">
@@ -83,17 +83,19 @@
             <th>Email</th>
             <th>Kode</th>
             <th>Harga</th>
+            <th>Tanggal</th>
             <th>Qty</th>
         </tr>
         @foreach ($data as $item )
         <tr>
             <td class="border px-6 py-4">{{ $loop->iteration }}</td>
-            <td class="border px-6 py-4">{{ $item->nama }}</td>
+            <td class="border px-6 py-4">{{ $item->salesmaster->name }}</td>
             <td class="border px-6 py-4">{{ $item->unit->name }}</td>
             <td class="border px-6 py-4">{{ $item->email }}</td>
             <td class="border px-6 py-4">{{ $item->kode }}</td>
             <td class="border px-6 py-4">{{ number_format($item->harga) }}</td>
             <td class="border px-6 py-4">{{ $item->qty }}</td>
+            <td class="border px-6 py-4">{{ $item->tanggal }}</td>
         </tr>
         @endforeach
     </table>

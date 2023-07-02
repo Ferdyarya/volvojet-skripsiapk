@@ -40,7 +40,7 @@ Route::get('/', function () {
     return redirect()->route('dashboard');
 });
 
-// dashboard
+// dashboard Super Admin
 Route::prefix('dashboard')->middleware(['auth:sanctum', 'admin'])->group(function()
 
 {
@@ -73,6 +73,21 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', 'admin'])->group(functio
     // update status transaction
     Route::get('tranasctions/{id}/status/{status} ', [TransactionController::class, 'changeStatus'])->name('transaction.changeStatus');
     Route::resource('transaction', TransactionController::class);
+
+    // HakAkses admin Service
+    Route::group(['middleware'=>['auth','hakakses:adminservice']], function(){
+        
+    });
+
+    // HakAkses admin Warehouse
+    Route::group(['middleware'=>['auth','hakakses:adminwarehouse']], function(){
+
+    });
+
+    // HakAkses admin Sales
+    Route::group(['middleware'=>['auth','hakakses:adminsales']], function(){
+
+    });
 });
 
 

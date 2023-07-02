@@ -1,12 +1,14 @@
 <x-perfect-scrollbar as="nav" aria-label="main" class="flex flex-col flex-1 gap-4 px-3" >
 
     {{-- Dashboard --}}
+    @if (Auth::user()->hakakses('superadmin'))
     <x-sidebar.link
         title="Dashboard" href="{{ route('dashboard') }}" :isActive="request()->routeIs('dashboard')">
         <x-slot name="icon">
             <x-icons.dashboard class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
         </x-slot>
     </x-sidebar.link>
+    @endif
     {{-- Dashboard/ --}}
 
     {{-- Master Data --}}
@@ -17,6 +19,8 @@
               <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
         </button>
         <ul id="dropdown-example" class="hidden py-2 space-y-2">
+
+            @if (Auth::user()->hakakses('adminservice') || Auth::user()->hakakses('adminwarehouse')|| Auth::user()->hakakses('adminsales')|| Auth::user()->hakakses('superadmin'))
               <li>
                 <div class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                     <x-jet-nav-link href="{{ route('unit.index') }}" :active="request()->routeIs('unit.index')">
@@ -24,7 +28,9 @@
                     </x-jet-nav-link>
                 </div>
               </li>
+              @endif
 
+              @if (Auth::user()->hakakses('adminsales')|| Auth::user()->hakakses('superadmin'))
               <li>
                 <div class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                     <x-jet-nav-link href="{{ route('salesmaster.index') }}" :active="request()->routeIs('salesmaster.index')">
@@ -32,7 +38,9 @@
                     </x-jet-nav-link>
                 </div>
               </li>
+              @endif
 
+              @if (Auth::user()->hakakses('adminservice') || Auth::user()->hakakses('adminwarehouse')|| Auth::user()->hakakses('superadmin'))
               <li>
                 <div class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                     <x-jet-nav-link href="{{ route('customermaster.index') }}" :active="request()->routeIs('customermaster.index')">
@@ -40,14 +48,17 @@
                     </x-jet-nav-link>
                 </div>
               </li>
+              @endif
 
+              @if (Auth::user()->hakakses('adminservice') || Auth::user()->hakakses('adminwarehouse')|| Auth::user()->hakakses('superadmin'))
               <li>
                 <div class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                     <x-jet-nav-link href="{{ route('supplier.index') }}" :active="request()->routeIs('supplier.index')">
-                        {{ __('Data Supplier for service') }}
+                        {{ __('Data Supplier') }}
                     </x-jet-nav-link>
                 </div>
               </li>
+              @endif
         </ul>
      </li>
      {{-- Master Data / --}}
@@ -60,14 +71,17 @@
               <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
         </button>
         <ul id="dropdown-data" class="hidden py-2 space-y-2">
+            @if (Auth::user()->hakakses('adminservice') || Auth::user()->hakakses('adminwarehouse')|| Auth::user()->hakakses('superadmin'))
               <li>
                 <div class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                     <x-jet-nav-link href="{{ route('product.index') }}" :active="request()->routeIs('product.index')">
-                        {{ __('Product Order Service') }}
+                        {{ __('Part Order Service') }}
                     </x-jet-nav-link>
                 </div>
               </li>
+            @endif
 
+            @if (Auth::user()->hakakses('adminsales')|| Auth::user()->hakakses('superadmin'))
               <li>
                 <div class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                     <x-jet-nav-link href="{{ route('sales.index') }}" :active="request()->routeIs('sales.index')">
@@ -75,8 +89,9 @@
                     </x-jet-nav-link>
                 </div>
               </li>
+            @endif
 
-
+              @if (Auth::user()->hakakses('adminservice')|| Auth::user()->hakakses('superadmin'))
               <li>
                 <div class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                     <x-jet-nav-link href="{{ route('customer.index') }}" :active="request()->routeIs('customer.index')">
@@ -84,7 +99,9 @@
                     </x-jet-nav-link>
                 </div>
               </li>
+              @endif
 
+              @if (Auth::user()->hakakses('adminwarehouse')|| Auth::user()->hakakses('superadmin'))
               <li>
                 <div class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                     <x-jet-nav-link href="{{ route('brgmsk.index') }}" :active="request()->routeIs('brgmsk.index')">
@@ -92,7 +109,9 @@
                     </x-jet-nav-link>
                 </div>
               </li>
+              @endif
 
+              @if (Auth::user()->hakakses('adminwarehouse')|| Auth::user()->hakakses('superadmin'))
               <li>
                 <div class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                     <x-jet-nav-link href="{{ route('brgkeluar.index') }}" :active="request()->routeIs('brgkeluar.index')">
@@ -100,7 +119,9 @@
                     </x-jet-nav-link>
                 </div>
               </li>
+              @endif
 
+              @if (Auth::user()->hakakses('adminservice') || Auth::user()->hakakses('adminwarehouse')|| Auth::user()->hakakses('adminsales')|| Auth::user()->hakakses('superadmin'))
               <li>
                 <div class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                     <x-jet-nav-link href="{{ route('custorder.index') }}" :active="request()->routeIs('custorder.index')">
@@ -108,15 +129,19 @@
                     </x-jet-nav-link>
                 </div>
               </li>
+              @endif
 
+              @if (Auth::user()->hakakses('adminservice') || Auth::user()->hakakses('adminwarehouse')|| Auth::user()->hakakses('adminsales')|| Auth::user()->hakakses('superadmin'))
               <li>
                 <div class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                     <x-jet-nav-link href="{{ route('transorder.index') }}" :active="request()->routeIs('transorder.index')">
-                        {{ __('Transfer Order Customer') }}
+                        {{ __('Transfer Order For Customer') }}
                     </x-jet-nav-link>
                 </div>
               </li>
+              @endif
 
+              @if (Auth::user()->hakakses('adminsales') || Auth::user()->hakakses('adminwarehouse')|| Auth::user()->hakakses('superadmin'))
               <li>
                 <div class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                     <x-jet-nav-link href="{{ route('partretur.index') }}" :active="request()->routeIs('partretur.index')">
@@ -124,6 +149,7 @@
                     </x-jet-nav-link>
                 </div>
               </li>
+              @endif
         </ul>
      {{-- Data Tables --}}
 

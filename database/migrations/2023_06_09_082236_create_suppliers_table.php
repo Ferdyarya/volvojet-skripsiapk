@@ -16,11 +16,8 @@ return new class extends Migration
         Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('produk');
             $table->string('alamat');
             $table->string('email');
-            $table->integer('kode');
-            $table->integer('qty');
             $table->timestamps();
             $table->softDeletes();
 

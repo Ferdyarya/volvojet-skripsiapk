@@ -72,7 +72,7 @@
 <body>
 
     <center>
-        <h1 class="">Export Table Customer</h1>
+        <h1 class="">Export Table Customer Service Component</h1>
     </center>
 
     <table id="customers">
@@ -81,19 +81,17 @@
             <th>Nama Customer</th>
             <th>Unit</th>
             <th>Email</th>
-            <th>Kode</th>
-            <th>Harga</th>
             <th>Qty</th>
+            <th>Tanggal</th>
         </tr>
         @foreach ($data as $item )
         <tr>
             <td class="border px-6 py-4">{{ $loop->iteration }}</td>
-            <td class="border px-6 py-4">{{ $item->nama }}</td>
+            <td class="border px-6 py-4">{{ $item->customermaster->name }}</td>
             <td class="border px-6 py-4">{{ $item->unit->name }}</td>
             <td class="border px-6 py-4">{{ $item->email }}</td>
-            <td class="border px-6 py-4">{{ $item->kode }}</td>
-            <td class="border px-6 py-4">{{ number_format($item->harga) }}</td>
             <td class="border px-6 py-4">{{ $item->qty }}</td>
+            <td class="border px-6 py-4">{{ $item->tanggal }}</td>
         </tr>
         @endforeach
     </table>

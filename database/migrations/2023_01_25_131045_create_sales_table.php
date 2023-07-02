@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->string('id_salesmaster');
             $table->integer('id_unit');
             $table->integer('harga');
             $table->integer('qty');
+            $table->date('tanggal');
             $table->timestamps();
             $table->softDeletes();
         });

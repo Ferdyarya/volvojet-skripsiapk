@@ -41,7 +41,7 @@ class SalesmasterController extends Controller
 
         Salesmaster::create($data);
 
-        return redirect()->route('salesmaster.index')->with('toast_success', 'Data salesmaster Telah ditambahkan bro');
+        return redirect()->route('salesmaster.index')->with('toast_success', 'Data Sales Master Telah ditambahkan bro');
     }
 
     /**
@@ -83,7 +83,7 @@ class SalesmasterController extends Controller
 
         //dd($data);
 
-        return redirect()->route('salesmaster.index')->with('toast_success', 'Data salesmaster telah berubah bro');
+        return redirect()->route('salesmaster.index')->with('toast_success', 'Data Sales Master telah berubah bro');
 
     }
 

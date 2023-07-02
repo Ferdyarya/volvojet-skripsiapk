@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Product;
 use App\Models\Unit;
+use App\Models\Customermaster;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -12,12 +12,12 @@ class Customers extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama', 'id_product', 'id_unit', 'alamat', 'email', 'kode', 'harga', 'qty'
+        'id_customermaster', 'id_unit', 'alamat', 'email', 'kode', 'harga', 'qty','tanggal'
     ];
 
-     public function product()
+     public function customermaster()
     {
-        return $this->hasOne(Product::class, 'id', 'id_product');
+        return $this->hasOne(Customermaster::class, 'id', 'id_customermaster');
     }
 
      public function unit()

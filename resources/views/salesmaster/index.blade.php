@@ -49,7 +49,7 @@
                             @forelse ($salesmaster as $item)
                             <tr>
                                 <td class="border px-6 py-4">{{ $loop->iteration }}</td>
-                                <td class="border px-6 py-4">{{ $item->nama }}</td>
+                                <td class="border px-6 py-4">{{ $item->name }}</td>
 
                                 <td class="border px-6 py-4 text-center">
                                     <a href="{{ route('salesmaster.edit', $item->id) }}"
