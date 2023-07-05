@@ -10,7 +10,8 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="mb-3">
                     <a href="{{ route('sales.create') }}"
-                        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Create Penjualan Sales</a>
+                        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Create Penjualan
+                        Sales</a>
                     <a href="{{ route('salespdf') }}"
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Export PDF</a>
                     <div class="flex justify-start mt-7">
@@ -37,17 +38,19 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="bg-white">
                     <table class="table-auto w-full">
                         <thead>
                             <tr>
                                 <th class="border px-6 py-4">No</th>
                                 <th class="border px-6 py-4">Nama Sales</th>
+                                <th class="border px-6 py-4">Customer Yang Beli</th>
                                 <th class="border px-6 py-4">Unit Dijual</th>
-                                {{-- <th class="border px-6 py-4">Gambar</th> --}}
-                                <th class="border px-6 py-4">Harga</th>
+                                <th class="border px-6 py-4">Harga Unit</th>
                                 <th class="border px-6 py-4">Qty</th>
                                 <th class="border px-6 py-4">Tanggal</th>
+                                <th class="border px-6 py-4">Total Harga</th>
                                 <th class="border px-6 py-4">Action</th>
                             </tr>
                         </thead>
@@ -56,11 +59,13 @@
                             <tr>
                                 <td class="border px-6 py-4">{{ $loop->iteration }}</td>
                                 <td class="border px-6 py-4">{{ $item->salesmaster->name }}</td>
+                                <td class="border px-6 py-4">{{ $item->customermaster->name }}</td>
                                 <td class="border px-6 py-4">{{ $item->unit->name }}</td>
                                 {{-- <td class="border px-6 py-4">{{ $item->gambar }}</td> --}}
-                                <td class="border px-6 py-4">Rp. {{ number_format($item->harga) }}</td>
+                                <td class="border px-6 py-4">Rp. {{ number_format($item->harga )}}</td>
                                 <td class="border px-6 py-4">{{ $item->qty }}</td>
                                 <td class="border px-6 py-4">{{ $item->tanggal }}</td>
+                                <td class="border px-6 py-4">Rp. {{ number_format($item->harga * $item->qty )}}</td>
                                 <td class="border px-6 py-4 text-center">
                                     <a href="{{ route('sales.edit', $item->id) }}"
                                         class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">Edit

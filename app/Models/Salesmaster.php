@@ -9,6 +9,6 @@ class Salesmaster extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name'
+        'name','kode','email','no_telp'
     ];
 }

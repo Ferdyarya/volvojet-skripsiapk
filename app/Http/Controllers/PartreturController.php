@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Unit;
 use App\Models\Partretur;
+use App\Models\Supplier;
 use PDF;
 
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class PartreturController extends Controller
         if($request->has('search')){
             $partretur = Partretur::where('nama', 'LIKE', '%' .$request->search.'%')->paginate(10);
         }else{
-            $partretur = Partretur::with(['unit'])->paginate(10);
+            $partretur = Partretur::with(['unit','supplier'])->paginate(10);
         }
         return view('partretur.index',[
             'partretur' => $partretur
@@ -34,8 +35,10 @@ class PartreturController extends Controller
     public function create()
     {
        $unit = Unit::all();
+       $supplier = Supplier::all();
         return view('partretur.create', [
             'unit' => $unit,
+            'supplier' => $supplier,
         ]);
     }
 
@@ -74,10 +77,12 @@ class PartreturController extends Controller
     public function edit(Partretur $Partretur)
     {
         $unit = Unit::all();
+        $supplier = Supplier::all();
 
         return view('Partretur.edit', [
             'item' => $Partretur,
-            'unit' => $unit
+            'unit' => $unit,
+            'supplier' => $supplier
         ]);
     }
 

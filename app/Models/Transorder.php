@@ -5,20 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Custorder;
+use App\Models\Customermaster;
+
 class Transorder extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id_product', 'id_customer', 'tanggal', 'qty','wo'
+        'id_custorder', 'id_customermaster', 'tanggal', 'qty','wo'
     ];
 
-     public function product()
+     public function custorder()
     {
-        return $this->hasOne(Product::class, 'id', 'id_product');
+        return $this->hasOne(Custorder::class, 'id', 'id_custorder');
     }
 
-    public function customer()
+    public function customermaster()
     {
-        return $this->hasOne(Customers::class, 'id', 'id_customer');
+        return $this->hasOne(Customermaster::class, 'id', 'id_customermaster');
     }
 }

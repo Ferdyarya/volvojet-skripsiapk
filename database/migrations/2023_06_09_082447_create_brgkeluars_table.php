@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('brgkeluars', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_product');
-            $table->integer('id_customer');
+            $table->string('partkeluar');
+            $table->integer('id_customermaster');
             $table->date('tanggal');
             $table->integer('qty');
             $table->timestamps();

@@ -9,6 +9,6 @@ class Customermaster extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name'
+        'name','alamat','kode','email'
     ];
 }

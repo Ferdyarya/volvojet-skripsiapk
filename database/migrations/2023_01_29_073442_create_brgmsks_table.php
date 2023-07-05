@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('brgmsks', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_product');
+            $table->string('partmasuk');
             $table->integer('id_supplier');
-            $table->date('tanggal');
             $table->integer('qty');
+            $table->date('tanggal');
             $table->timestamps();
             $table->softDeletes();
         });

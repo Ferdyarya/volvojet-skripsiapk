@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Custorder;
-use App\Models\Product;
+use App\Models\Customermaster;
+// use App\Models\Product;
 use Illuminate\Http\Request;
 use PDF;
 
@@ -20,7 +21,7 @@ class CustorderController extends Controller
         if($request->has('search')){
             $custorder = Custorder::where('nama', 'LIKE', '%' .$request->search.'%')->paginate(10);
         }else{
-            $custorder = Custorder::with(['product'])->paginate(10);
+            $custorder = Custorder::with(['customermaster'])->paginate(10);
         }
         return view('custorder.index',[
             'custorder' => $custorder
@@ -34,9 +35,9 @@ class CustorderController extends Controller
      */
     public function create()
     {
-       $product = Product::all();
+       $customermaster = Customermaster::all();
         return view('custorder.create', [
-            'product' => $product,
+            'customermaster' => $customermaster,
         ]);
     }
 
@@ -52,7 +53,7 @@ class CustorderController extends Controller
 
         Custorder::create($data);
 
-        return redirect()->route('custorder.index')->with('toast_success', 'Data custorder Telah ditambahkan bro');
+        return redirect()->route('custorder.index')->with('toast_success', 'Data Customer Order Telah ditambahkan bro');
     }
 
     /**
@@ -74,11 +75,11 @@ class CustorderController extends Controller
      */
     public function edit(Custorder $custorder)
     {
-        $product = Product::all();
+        $customermaster = Customermaster::all();
 
         return view('custorder.edit', [
             'item' => $custorder,
-            'product' => $product
+            'customermaster' => $customermaster
         ]);
     }
 
@@ -97,7 +98,7 @@ class CustorderController extends Controller
 
         //dd($data);
 
-        return redirect()->route('custorder.index')->with('toast_success', 'Data custorder telah berubah bro');
+        return redirect()->route('custorder.index')->with('toast_success', 'Data Customer Order telah berubah bro');
 
     }
 
@@ -111,7 +112,7 @@ class CustorderController extends Controller
     {
         $custorder->delete();
 
-        return redirect()->route('custorder.index')->with('toast_success', 'Data custorder telah dihapus');
+        return redirect()->route('custorder.index')->with('toast_success', 'Data Customer Order telah dihapus');
     }
 
     public function custorderpdf()

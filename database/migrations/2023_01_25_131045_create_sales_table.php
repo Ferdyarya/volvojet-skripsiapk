@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('id_salesmaster');
             $table->integer('id_unit');
+            $table->integer('id_customermaster');
             $table->integer('harga');
             $table->integer('qty');
             $table->date('tanggal');

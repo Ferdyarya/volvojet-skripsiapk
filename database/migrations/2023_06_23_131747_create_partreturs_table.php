@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('pn');
-            $table->string('asalpart');
+            $table->string('id_supplier');
             $table->string('id_unit');
             $table->string('qty');
             $table->date('tanggal');

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('id_supplier');
             $table->string('nama');
             $table->string('qty');
+            $table->string('tanggal');
             $table->timestamps();
             $table->softDeletes();
         });

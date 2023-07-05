@@ -45,8 +45,8 @@
                                 <th class="border px-6 py-4">No</th>
                                 <th class="border px-6 py-4">WO</th>
                                 <th class="border px-6 py-4">Nama Customers</th>
-                                <th class="border px-6 py-4">Product</th>
-                                <th class="border px-6 py-4">qty</th>
+                                <th class="border px-6 py-4">Part Order</th>
+                                <th class="border px-6 py-4">Qty</th>
                                 <th class="border px-6 py-4">tanggal</th>
                                 <th class="border px-6 py-4">Action</th>
                             </tr>
@@ -55,9 +55,9 @@
                             @forelse ($custorder as $item)
                             <tr>
                                 <td class="border px-6 py-4">{{ $loop->iteration }}</td>
-                                <td class="border px-6 py-4">{{ $item->namacust }}</td>
-                                <td class="border px-6 py-4">{{ $item->product->nama }}</td>
                                 <td class="border px-6 py-4">{{ $item->wo }}</td>
+                                <td class="border px-6 py-4">{{ $item->customermaster->name }}</td>
+                                <td class="border px-6 py-4">{{ $item->order_product}}</td>
                                 <td class="border px-6 py-4">{{ $item->qty }}</td>
                                 <td class="border px-6 py-4">{{ $item->tanggal }}</td>
                                 <td class="border px-6 py-4 text-center">

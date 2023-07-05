@@ -55,9 +55,9 @@
                             @forelse ($transorder as $item)
                             <tr>
                                 <td class="border px-6 py-4">{{ $loop->iteration }}</td>
-                                <td class="border px-6 py-4">{{ $item->customer->nama }}</td>
-                                <td class="border px-6 py-4">{{ $item->product->nama }}</td>
                                 <td class="border px-6 py-4">{{ $item->wo }}</td>
+                                <td class="border px-6 py-4">{{ $item->customermaster->name }}</td>
+                                <td class="border px-6 py-4">{{ $item->custorder->order_product }}</td>
                                 <td class="border px-6 py-4">{{ $item->qty }}</td>
                                 <td class="border px-6 py-4">{{ $item->tanggal }}</td>
                                 <td class="border px-6 py-4 text-center">

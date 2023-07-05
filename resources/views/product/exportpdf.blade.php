@@ -83,6 +83,7 @@
             <th>Nama Barang</th>
             <th>Harga</th>
             <th>Qty</th>
+            <th>Tanggal</th>
         </tr>
         @foreach ($data as $item )
         <tr>
@@ -90,8 +91,8 @@
             <td class="border px-6 py-4">{{ $item->supplier->name }}</td>
             <td class="border px-6 py-4">{{ $item->unit->name }}</td>
             <td class="border px-6 py-4">{{ $item->nama }}</td>
-            <td class="border px-6 py-4">Rp. {{ number_format($item->harga) }}</td>
             <td class="border px-6 py-4">{{ $item->qty }}</td>
+            <td class="border px-6 py-4">{{ $item->tanggal }}</td>
         </tr>
         @endforeach
     </table>

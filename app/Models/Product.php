@@ -12,7 +12,7 @@ class Product extends Model
     use HasFactory;
 
      protected $fillable = [
-        'id_unit','id_supplier', 'nama', 'qty'
+        'id_unit','id_supplier', 'nama', 'qty','tanggal'
     ];
 
      public function unit()

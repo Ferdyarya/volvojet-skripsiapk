@@ -5,27 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Brgkeluar;
-use App\Models\Product;
-use App\Models\Customers;
+use App\Models\Customermaster;
 use PDF;
 
 class BrgkeluarController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        $keyword1 = $request->keyword1;
 
-        $brgkeluar = Brgkeluar::with('product')->whereHas('product', function($query) use($keyword1){
-            $query->where('nama', 'LIKE', '%'.$keyword1.'%');
-        })->paginate(10);
+        if($request->has('search')){
+            $brgkeluar = Brgkeluar::where('nama', 'LIKE', '%' .$request->search.'%')->paginate(10);
+        }else{
+            $brgkeluar = Brgkeluar::with(['customermaster'])->paginate(10);
+        }
 
         return view('brgkeluar.index',[
-            'brgkeluar' => $brgkeluar
+            'brgkeluar' => $brgkeluar,
         ]);
     }
 
@@ -36,11 +36,9 @@ class BrgkeluarController extends Controller
      */
     public function create()
     {
-       $customer = Customers::all();
-       $product = Product::all();
+       $customermaster = Customermaster::all();
         return view('brgkeluar.create', [
-            'customer' => $customer,
-            'product' => $product,
+            'customermaster' => $customermaster,
         ]);
     }
 
@@ -56,7 +54,7 @@ class BrgkeluarController extends Controller
 
         Brgkeluar::create($data);
 
-        return redirect()->route('brgkeluar.index')->with('toast_success', 'Data barang Keluar Telah ditambahkan bro');
+        return redirect()->route('brgkeluar.index')->with('toast_success', 'Data Barang Keluar Telah ditambahkan bro');
     }
 
     /**
@@ -78,13 +76,11 @@ class BrgkeluarController extends Controller
      */
     public function edit(Brgkeluar $brgkeluar)
     {
-        $customer = Customers::all();
-        $product = Product::all();
+        $customermaster = Customermaster::all();
 
         return view('brgkeluar.edit', [
             'item' => $brgkeluar,
-            'customer' => $customer,
-            'product' => $product
+            'customermaster' => $customermaster,
         ]);
     }
 

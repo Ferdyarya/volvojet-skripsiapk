@@ -16,6 +16,9 @@ return new class extends Migration
         Schema::create('customermasters', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('alamat');
+            $table->string('kode');
+            $table->string('email');
             $table->timestamps();
             $table->softDeletes();
         });

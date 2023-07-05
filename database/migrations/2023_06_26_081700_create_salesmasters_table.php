@@ -16,6 +16,9 @@ return new class extends Migration
         Schema::create('salesmasters', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('kode');
+            $table->string('email');
+            $table->string('no_telp');
             $table->timestamps();
             $table->softDeletes();
         });

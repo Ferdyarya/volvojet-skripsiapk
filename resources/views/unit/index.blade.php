@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Unit') }}
+            {{ __('Data Unit') }}
         </h2>
     </x-slot>
 
@@ -10,7 +10,7 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="mb-3">
                     <a href="{{ route('unit.create') }}"
-                        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Create unit</a>
+                        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Create Data unit</a>
                     <div class="flex justify-start mt-7">
                         <div class=" xl:w-96 ">
                             <form action="unit" method="GET">
@@ -39,8 +39,11 @@
                     <table class="table-auto w-full">
                         <thead>
                             <tr>
-                                <th class="border px-6 py-4">Number</th>
-                                <th class="border px-6 py-4">Name</th>
+                                <th class="border px-6 py-4">No</th>
+                                <th class="border px-6 py-4">Nama Unit</th>
+                                <th class="border px-6 py-4">Model</th>
+                                <th class="border px-6 py-4">Part Number</th>
+                                <th class="border px-6 py-4">SN Unit</th>
                                 <th class="border px-6 py-4">Action</th>
 
                             </tr>
@@ -50,6 +53,9 @@
                             <tr>
                                 <td class="border px-6 py-4">{{ $loop->iteration }}</td>
                                 <td class="border px-6 py-4">{{ $item->name }}</td>
+                                <td class="border px-6 py-4">{{ $item->model }}</td>
+                                <td class="border px-6 py-4">{{ $item->pn }}</td>
+                                <td class="border px-6 py-4">{{ $item->sn_unit }}</td>
 
                                 <td class="border px-6 py-4 text-center">
                                     <a href="{{ route('unit.edit', $item->id) }}"

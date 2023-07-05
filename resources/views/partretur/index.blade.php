@@ -58,7 +58,7 @@
                                 <td class="border px-6 py-4">{{ $loop->iteration }}</td>
                                 <td class="border px-6 py-4">{{ $item->nama}}</td>
                                 <td class="border px-6 py-4">{{ $item->pn}}</td>
-                                <td class="border px-6 py-4">{{ $item->asalpart}}</td>
+                                <td class="border px-6 py-4">{{ $item->supplier->nama}}</td>
                                 <td class="border px-6 py-4">{{ $item->unit->name }}</td>
                                 <td class="border px-6 py-4">{{ $item->qty }}</td>
                                 <td class="border px-6 py-4">{{ $item->tanggal }}</td>

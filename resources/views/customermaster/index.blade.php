@@ -41,6 +41,9 @@
                             <tr>
                                 <th class="border px-6 py-4">Number</th>
                                 <th class="border px-6 py-4">Name</th>
+                                <th class="border px-6 py-4">Alamat</th>
+                                <th class="border px-6 py-4">Kode</th>
+                                <th class="border px-6 py-4">Email</th>
                                 <th class="border px-6 py-4">Action</th>
 
                             </tr>
@@ -50,6 +53,9 @@
                             <tr>
                                 <td class="border px-6 py-4">{{ $loop->iteration }}</td>
                                 <td class="border px-6 py-4">{{ $item->name }}</td>
+                                <td class="border px-6 py-4">{{ $item->alamat }}</td>
+                                <td class="border px-6 py-4">{{ $item->kode }}</td>
+                                <td class="border px-6 py-4">{{ $item->email }}</td>
 
                                 <td class="border px-6 py-4 text-center">
                                     <a href="{{ route('customermaster.edit', $item->id) }}"

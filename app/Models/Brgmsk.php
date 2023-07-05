@@ -12,13 +12,8 @@ class Brgmsk extends Model
     use HasFactory;
 
     protected $fillable = [
-       'id_product', 'id_supplier', 'tanggal', 'qty'
+       'partmasuk', 'id_supplier', 'tanggal', 'qty'
    ];
-
-    public function product()
-   {
-       return $this->hasOne(Product::class, 'id', 'id_product');
-   }
 
    public function supplier()
    {

@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Product;
-use App\Models\Customers;
+use App\Models\Custorder;
+use App\Models\Customermaster;
 use App\Models\Transorder;
 use Illuminate\Http\Request;
 use PDF;
@@ -18,14 +18,13 @@ class TransorderController extends Controller
     public function index(Request $request)
     {
 
-        $keyword = $request->keyword;
-
-        $transorder = Transorder::with('product')->whereHas('product', function($query) use($keyword){
-            $query->where('nama', 'LIKE', '%'.$keyword.'%');
-        })->paginate(10);
-
+        if($request->has('search')){
+            $transorder = Transorder::where('nama', 'LIKE', '%' .$request->search.'%')->paginate(10);
+        }else{
+            $transorder = Transorder::with(['customermaster','custorder'])->paginate(10);
+        }
         return view('transorder.index',[
-            'transorder' => $transorder,
+            'transorder' => $transorder
         ]);
     }
 
@@ -36,11 +35,11 @@ class TransorderController extends Controller
      */
     public function create()
     {
-       $customer = Customers::all();
-       $product = Product::all();
+       $customermaster = Customermaster::all();
+       $custorder = Custorder::all();
         return view('transorder.create', [
-            'customer' => $customer,
-            'product' => $product,
+            'customermaster' => $customermaster,
+            'custorder' => $custorder,
         ]);
     }
 
@@ -78,13 +77,13 @@ class TransorderController extends Controller
      */
     public function edit(Transorder $transorder)
     {
-        $customer = Customers::all();
-        $product = Product::all();
+        $customermaster = Customermaster::all();
+        $custorder = Custorder::all();
 
         return view('transorder.edit', [
             'item' => $transorder,
-            'customer' => $customer,
-            'product' => $product
+            'customermaster' => $customermaster,
+            'custorder' => $custorder
         ]);
     }
 

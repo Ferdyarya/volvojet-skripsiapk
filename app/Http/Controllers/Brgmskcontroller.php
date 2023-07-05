@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use PDF;
 use App\Models\Brgmsk;
 
-use App\Models\Product;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,10 +21,10 @@ class Brgmskcontroller extends Controller
 
         $keyword = $request->keyword;
 
-        $brgmsk = Brgmsk::with('product')->whereHas('product', function($query) use($keyword){
+        $brgmsk = Brgmsk::with('supplier')->whereHas('supplier', function($query) use($keyword){
             $query->where('nama', 'LIKE', '%'.$keyword.'%');
         })->paginate(10);
-        
+
         return view('brgmsk.index',[
             'brgmsk' => $brgmsk,
         ]);
@@ -39,10 +38,8 @@ class Brgmskcontroller extends Controller
     public function create()
     {
        $supplier = Supplier::all();
-       $product = Product::all();
         return view('brgmsk.create', [
             'supplier' => $supplier,
-            'product' => $product,
         ]);
     }
 
@@ -81,12 +78,10 @@ class Brgmskcontroller extends Controller
     public function edit(Brgmsk $brgmsk)
     {
         $supplier = Supplier::all();
-        $product = Product::all();
 
         return view('brgmsk.edit', [
             'item' => $brgmsk,
             'supplier' => $supplier,
-            'product' => $product
         ]);
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Unit;
 use App\Models\Sales;
 use App\Models\Salesmaster;
+use App\Models\Customermaster;
 use Illuminate\Http\Request;
 use PDF;
 
@@ -16,14 +17,23 @@ class SalesController extends Controller
      */
     public function index(Request $request)
     {
+
         if($request->has('search')){
             $sales = Sales::where('nama', 'LIKE', '%' .$request->search.'%')->paginate(10);
         }else{
-            $sales = Sales::with(['unit', 'salesmaster'])->paginate(10);
+            $sales = Sales::with(['unit', 'salesmaster','customermaster'])->paginate(10);
         }
-        return view('sales.index',[
-            'sales' => $sales
-        ]);
+        return view('sales.index',[  'sales' => $sales ]);
+
+        //hitungtotal
+        $sales = Sales::all();
+        $total = $sales->sum(function ($product) {
+            return $product->price * $product->qty;
+        });
+
+        return view('sales.index', compact('sales', 'total'));
+    // end hitung total
+
     }
 
     /**
@@ -35,9 +45,11 @@ class SalesController extends Controller
     {
        $unit = Unit::all();
        $salesmaster = Salesmaster::all();
+       $customermaster = Customermaster::all();
         return view('sales.create', [
             'unit' => $unit,
             'salesmaster' => $salesmaster,
+            'customermaster' => $customermaster,
         ]);
     }
 
@@ -77,11 +89,14 @@ class SalesController extends Controller
     {
         $unit = Unit::all();
         $salesmaster = Salesmaster::all();
+        $customermaster = Customermaster::all();
 
         return view('sales.edit', [
             'item' => Sales::find($id),
             'unit' => $unit,
-            'salesmaster' => $salesmaster
+            'salesmaster' => $salesmaster,
+            'customermaster' => $customermaster,
+
         ]);
     }
 

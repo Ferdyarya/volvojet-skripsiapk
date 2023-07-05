@@ -78,15 +78,15 @@
     <table id="masuk">
         <tr>
             <th>No</th>
-            <th>Product</th>
-            <th>Supplier</th>
+            <th>Part Masuk</th>
+            <th>Supplier yang mengirim</th>
             <th>Qty</th>
             <th>Tanggal</th>
         </tr>
         @foreach ($data as $item )
         <tr>
             <td class="border px-6 py-4">{{ $loop->iteration }}</td>
-            <td class="border px-6 py-4">{{ $item->product->nama }}</td>
+            <td class="border px-6 py-4">{{ $item->partmasuk }}</td>
             <td class="border px-6 py-4">{{ $item->supplier->nama }}</td>
             <td class="border px-6 py-4">{{ $item->qty }}</td>
             <td class="border px-6 py-4">{{ $item->tanggal }}</td>

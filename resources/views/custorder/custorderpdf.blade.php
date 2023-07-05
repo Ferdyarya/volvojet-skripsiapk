@@ -78,7 +78,7 @@
     <table id="custorder">
         <tr>
             <th>No</th>
-            <th>Product</th>
+            <th>Part Order</th>
             <th>WO</th>
             <th>qty</th>
             <th>harga</th>
@@ -87,7 +87,7 @@
         @foreach ($data as $item )
         <tr>
             <td class="border px-6 py-4">{{ $loop->iteration }}</td>
-            <td class="border px-6 py-4">{{ $item->namacust }}</td>
+            <td class="border px-6 py-4">{{ $item->order_product }}</td>
             <td class="border px-6 py-4">{{ $item->product->nama }}</td>
             <td class="border px-6 py-4">{{ $item->wo }}</td>
             <td class="border px-6 py-4">{{ $item->qty }}</td>

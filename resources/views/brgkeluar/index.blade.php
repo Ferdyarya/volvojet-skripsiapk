@@ -43,8 +43,8 @@
                         <thead>
                             <tr>
                                 <th class="border px-6 py-4">No</th>
-                                <th class="border px-6 py-4">Product</th>
-                                <th class="border px-6 py-4">Customer</th>
+                                <th class="border px-6 py-4">Part Keluar</th>
+                                <th class="border px-6 py-4">Untuk Customer</th>
                                 <th class="border px-6 py-4">Qty</th>
                                 <th class="border px-6 py-4">Tanggal</th>
                                 <th class="border px-6 py-4">Action</th>
@@ -54,8 +54,8 @@
                             @forelse ($brgkeluar as $item)
                             <tr>
                                 <td class="border px-6 py-4">{{ $loop->iteration }}</td>
-                                <td class="border px-6 py-4">{{ $item->product->nama }}</td>
-                                <td class="border px-6 py-4">{{ $item->customer->nama }}</td>
+                                <td class="border px-6 py-4">{{ $item->partkeluar }}</td>
+                                <td class="border px-6 py-4">{{ $item->customermaster->name }}</td>
                                 <td class="border px-6 py-4">{{ $item->qty }}</td>
                                 <td class="border px-6 py-4">{{ $item->tanggal }}</td>
                                 <td class="border px-6 py-4 text-center">

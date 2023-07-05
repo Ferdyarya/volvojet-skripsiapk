@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('custorders', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_product');
-            $table->string('namacust');
+            $table->string('order_product');
+            $table->integer('id_customermaster');
             $table->integer('qty');
             $table->integer('wo');
             $table->date('tanggal');

@@ -47,6 +47,7 @@
                                 <th class="border px-6 py-4">Kategori Unit</th>
                                 <th class="border px-6 py-4">Nama Product</th>
                                 <th class="border px-6 py-4">Qty</th>
+                                <th class="border px-6 py-4">Tanggal</th>
                                 <th class="border px-6 py-4">Action</th>
                             </tr>
                         </thead>
@@ -58,6 +59,7 @@
                                 <td class="border px-6 py-4">{{ $item->unit->name }}</td>
                                 <td class="border px-6 py-4">{{ $item->nama }}</td>
                                 <td class="border px-6 py-4">{{ $item->qty }}</td>
+                                <td class="border px-6 py-4">{{ $item->tanggal }}</td>
                                 <td class="border px-6 py-4 text-center">
                                     <a href="{{ route('product.edit', $item->id) }}"
                                         class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">Edit

@@ -26,11 +26,12 @@
                     </div>
                 </div>
                 @endif
-                <form action="{{ route('partretur.store') }}" class="w-full" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('partretur.store') }}" class="w-full" method="POST"
+                    enctype="multipart/form-data">
 
                     @csrf
 
-                    <div class="flex flex-wrap -mx-3 mb-6">
+                    <div class="flex flex-1/5 -mx-2 mb-6">
                         <div class="w-full px-3">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                 for="grid-last-name">Nama Part</label>
@@ -38,9 +39,7 @@
                                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 id="grid-last-name" type="text" placeholder="Nama Part">
                         </div>
-                    </div>
 
-                    <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                 for="grid-last-name">Part Number</label>
@@ -48,19 +47,21 @@
                                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 id="grid-last-name" type="text" placeholder="Part Number">
                         </div>
-                    </div>
 
-                    <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3">
-                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                for="grid-last-name">Asal Part</label>
-                            <input value="{{ old('asalpart') }}" name="asalpart"
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 "
+                                for="grid-last-name">
+                                Asal Supplier
+                            </label>
+                            <select name="id_supplier"
                                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                id="grid-last-name" type="text" placeholder="Asal Part">
+                                id="grid-last-name">
+                                @foreach ($supplier as $item)
+                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                @endforeach
+                            </select>
                         </div>
-                    </div>
 
-                    <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                 for="grid-last-name">
@@ -74,9 +75,7 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div>
 
-                    <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                 for="grid-last-name">
@@ -84,11 +83,9 @@
                             </label>
                             <input value="{{ old('qty') }}" name="qty"
                                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                id="grid-last-name" type="number" step="0.01"  placeholder="QTY">
+                                id="grid-last-name" type="number" step="0.01" placeholder="QTY">
                         </div>
-                    </div>
 
-                    <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                 for="grid-last-name">Tanggal</label>
@@ -98,8 +95,13 @@
                         </div>
                     </div>
 
+                    {{-- Action button --}}
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3 text-right">
+                            <button type="submit"
+                                class="bg-red-700 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                Add More
+                            </button>
                             <button type="submit"
                                 class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                                 Save Part Retur
@@ -107,9 +109,20 @@
                         </div>
                     </div>
 
-
                 </form>
             </div>
         </div>
     </div>
+
+
+    <script>
+        var i=0;
+        $('#add').click(function(){
+            ++i;
+            $('$table').append(
+                `<tr>
+            )
+        })
+    </script>
+
 </x-app-layout>

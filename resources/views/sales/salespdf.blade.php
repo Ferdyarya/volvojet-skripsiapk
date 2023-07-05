@@ -78,23 +78,23 @@
     <table id="sales">
         <tr>
             <th>No</th>
-            <th>Nama Customer</th>
+            <th>Nama Sales</th>
+            <th>Nama Customer Yang Beli</th>
             <th>Unit</th>
-            <th>Email</th>
-            <th>Kode</th>
-            <th>Harga</th>
-            <th>Tanggal</th>
             <th>Qty</th>
+            <th>Harga</th>
+            <th>Total</th>
+            <th>Tanggal</th>
         </tr>
         @foreach ($data as $item )
         <tr>
             <td class="border px-6 py-4">{{ $loop->iteration }}</td>
             <td class="border px-6 py-4">{{ $item->salesmaster->name }}</td>
+            <td class="border px-6 py-4">{{ $item->customermaster->name }}</td>
             <td class="border px-6 py-4">{{ $item->unit->name }}</td>
-            <td class="border px-6 py-4">{{ $item->email }}</td>
-            <td class="border px-6 py-4">{{ $item->kode }}</td>
             <td class="border px-6 py-4">{{ number_format($item->harga) }}</td>
             <td class="border px-6 py-4">{{ $item->qty }}</td>
+            <td class="border px-6 py-4">{{ $item->harga * $item->qty }}</td>
             <td class="border px-6 py-4">{{ $item->tanggal }}</td>
         </tr>
         @endforeach
