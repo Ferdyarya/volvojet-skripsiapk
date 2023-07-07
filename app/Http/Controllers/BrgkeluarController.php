@@ -51,8 +51,16 @@ class BrgkeluarController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $perulanganInput = count($data["partkeluar"]);
 
-        Brgkeluar::create($data);
+        for ($i=0; $i < $perulanganInput; $i++) {
+            Brgkeluar::create([
+                'partkeluar' => $data["partkeluar"][$i],
+                'id_customermaster' => $data["id_customermaster"][$i],
+                'qty' => $data["qty"][$i],
+                'tanggal' => $data["tanggal"][$i],
+            ]);
+        }
 
         return redirect()->route('brgkeluar.index')->with('toast_success', 'Data Barang Keluar Telah ditambahkan bro');
     }

@@ -50,9 +50,17 @@ class CustorderController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $perulanganInput = count($data["order_product"]);
 
-        Custorder::create($data);
-
+        for ($i=0; $i < $perulanganInput; $i++) {
+            Custorder::create([
+                'order_product' => $data["order_product"][$i],
+                'id_customermaster' => $data["id_customermaster"][$i],
+                'qty' => $data["qty"][$i],
+                'wo' => $data["wo"][$i],
+                'tanggal' => $data["tanggal"][$i],
+            ]);
+        }
         return redirect()->route('custorder.index')->with('toast_success', 'Data Customer Order Telah ditambahkan bro');
     }
 

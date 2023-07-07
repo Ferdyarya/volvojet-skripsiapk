@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Custorder;
+// use App\Models\Custorder;
 use App\Models\Customermaster;
 use App\Models\Transorder;
+use App\Models\Supplier;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 use PDF;
 
@@ -21,7 +23,7 @@ class TransorderController extends Controller
         if($request->has('search')){
             $transorder = Transorder::where('nama', 'LIKE', '%' .$request->search.'%')->paginate(10);
         }else{
-            $transorder = Transorder::with(['customermaster','custorder'])->paginate(10);
+            $transorder = Transorder::with(['supplier','unit','customermaster'])->paginate(10);
         }
         return view('transorder.index',[
             'transorder' => $transorder
@@ -35,11 +37,15 @@ class TransorderController extends Controller
      */
     public function create()
     {
+    //    $customermaster = Customermaster::all();
+       $supplier = Supplier::all();
+       $unit = Unit::all();
        $customermaster = Customermaster::all();
-       $custorder = Custorder::all();
         return view('transorder.create', [
+            // 'customermaster' => $customermaster,
+            'supplier' => $supplier,
+            'unit' => $unit,
             'customermaster' => $customermaster,
-            'custorder' => $custorder,
         ]);
     }
 
@@ -52,8 +58,20 @@ class TransorderController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $perulanganInput = count($data["id_supplier"]);
 
-        Transorder::create($data);
+        for ($i=0; $i < $perulanganInput; $i++) {
+            Transorder::create([
+                'id_supplier' => $data["id_supplier"][$i],
+                'id_unit' => $data["id_unit"][$i],
+                'id_customermaster' => $data["id_customermaster"][$i],
+                'namapart' => $data["namapart"][$i],
+                'pemohon' => $data["pemohon"][$i],
+                'qty' => $data["qty"][$i],
+                'wo' => $data["wo"][$i],
+                'tanggal' => $data["tanggal"][$i],
+            ]);
+        }
 
         return redirect()->route('transorder.index')->with('toast_success', 'Data transorder Telah ditambahkan bro');
     }
@@ -77,13 +95,15 @@ class TransorderController extends Controller
      */
     public function edit(Transorder $transorder)
     {
-        $customermaster = Customermaster::all();
-        $custorder = Custorder::all();
+        $supplier = Supplier::all();
+       $unit = Unit::all();
+       $customermaster = Customermaster::all();
 
         return view('transorder.edit', [
             'item' => $transorder,
+            'supplier' => $supplier,
+            'unit' => $unit,
             'customermaster' => $customermaster,
-            'custorder' => $custorder
         ]);
     }
 

@@ -14,7 +14,7 @@ class Sales extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id_salesmaster','id_customermaster', 'id_unit', 'harga', 'qty', 'tanggal'
+        'id_salesmaster','id_customermaster', 'id_unit', 'harga', 'qty', 'tanggal','status'
     ];
 
     public function unit()

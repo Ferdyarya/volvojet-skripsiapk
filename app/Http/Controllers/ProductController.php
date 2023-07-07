@@ -51,8 +51,17 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $perulanganInput = count($data["nama"]);
 
-        Product::create($data);
+        for ($i=0; $i < $perulanganInput; $i++) {
+            Product::create([
+                'id_unit' => $data["id_unit"][$i],
+                'id_supplier' => $data["id_supplier"][$i],
+                'nama' => $data["nama"][$i],
+                'qty' => $data["qty"][$i],
+                'tanggal' => $data["tanggal"][$i],
+            ]);
+        }
 
         return redirect()->route('product.index')->with('toast_success', 'Data Part For Service Telah ditambahkan bro');
     }

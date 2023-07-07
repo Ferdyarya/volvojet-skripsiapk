@@ -51,8 +51,17 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $perulanganInput = count($data["id_customermaster"]);
 
-        Customers::create($data);
+        for ($i=0; $i < $perulanganInput; $i++) {
+            Customers::create([
+                'id_customermaster' => $data["id_customermaster"][$i],
+                'id_unit' => $data["id_unit"][$i],
+                'email' => $data["email"][$i],
+                'qty' => $data["qty"][$i],
+                'tanggal' => $data["tanggal"][$i],
+            ]);
+        }
 
         return redirect()->route('customer.index')->with('toast_success', 'Data Customer Service Telah ditambahkan bro');
     }

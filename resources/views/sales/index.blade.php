@@ -66,6 +66,7 @@
                                 <td class="border px-6 py-4">{{ $item->qty }}</td>
                                 <td class="border px-6 py-4">{{ $item->tanggal }}</td>
                                 <td class="border px-6 py-4">Rp. {{ number_format($item->harga * $item->qty )}}</td>
+                                <td class="border px-6 py-4">{{ $item->status }}</td>
                                 <td class="border px-6 py-4 text-center">
                                     <a href="{{ route('sales.edit', $item->id) }}"
                                         class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">Edit

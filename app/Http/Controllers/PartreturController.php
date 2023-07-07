@@ -51,8 +51,19 @@ class PartreturController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $perulanganInput = count($data["nama"]);
 
-        Partretur::create($data);
+        for ($i=0; $i < $perulanganInput; $i++) {
+            Partretur::create([
+                'nama' => $data["nama"][$i],
+                'pn' => $data["pn"][$i],
+                'id_supplier' => $data["id_supplier"][$i],
+                'id_unit' => $data["id_unit"][$i],
+                'qty' => $data["qty"][$i],
+                'tanggal' => $data["tanggal"][$i],
+            ]);
+        }
+
 
         return redirect()->route('partretur.index')->with('toast_success', 'Data Partretur Telah ditambahkan bro');
     }
@@ -74,13 +85,13 @@ class PartreturController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Partretur $Partretur)
+    public function edit(Partretur $partretur)
     {
         $unit = Unit::all();
         $supplier = Supplier::all();
 
-        return view('Partretur.edit', [
-            'item' => $Partretur,
+        return view('partretur.edit', [
+            'item' => $partretur,
             'unit' => $unit,
             'supplier' => $supplier
         ]);
@@ -93,15 +104,15 @@ class PartreturController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Partretur $Partretur)
+    public function update(Request $request, Partretur $partretur)
     {
         $data = $request->all();
 
-        $Partretur->update($data);
+        $partretur->update($data);
 
         //dd($data);
 
-        return redirect()->route('Partretur.index')->with('toast_success', 'Data Partretur telah berubah bro');
+        return redirect()->route('partretur.index')->with('toast_success', 'Data Partretur telah berubah bro');
 
     }
 
@@ -111,11 +122,11 @@ class PartreturController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Partretur $Partretur)
+    public function destroy(Partretur $partretur)
     {
-        $Partretur->delete();
+        $partretur->delete();
 
-        return redirect()->route('Partretur.index')->with('toast_success', 'Data Partretur telah dihapus');
+        return redirect()->route('partretur.index')->with('toast_success', 'Data Partretur telah dihapus');
     }
 
     public function partreturpdf()

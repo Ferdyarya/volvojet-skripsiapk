@@ -62,8 +62,18 @@ class SalesController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $perulanganInput = count($data["id_salesmaster"]);
 
-        Sales::create($data);
+        for ($i=0; $i < $perulanganInput; $i++) {
+            Sales::create([
+                'id_salesmaster' => $data["id_salesmaster"][$i],
+                'id_customermaster' => $data["id_customermaster"][$i],
+                'id_unit' => $data["id_unit"][$i],
+                'harga' => $data["harga"][$i],
+                'qty' => $data["qty"][$i],
+                'tanggal' => $data["tanggal"][$i],
+            ]);
+        }
 
         return redirect()->route('sales.index')->with('toast_success', 'Data Penjualan Sales Service Telah ditambahkan bro');
     }

@@ -192,6 +192,11 @@ class DatabaseSeeder extends Seeder
             'alamat' => 'BALIKPAPAN',
             'email' => 'PTitubalikpapan@gmail.com',
         ]);
+        Supplier::create([
+            'nama' => 'PT INDOTRUCK BANJARMASIN',
+            'alamat' => 'BANJARMASIN',
+            'email' => 'PTitubanjarmasin@gmail.com',
+        ]);
 
     }
 }

@@ -52,8 +52,16 @@ class Brgmskcontroller extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $perulanganInput = count($data["partmasuk"]);
 
-        Brgmsk::create($data);
+        for ($i=0; $i < $perulanganInput; $i++) {
+            Brgmsk::create([
+                'partmasuk' => $data["partmasuk"][$i],
+                'id_supplier' => $data["id_supplier"][$i],
+                'qty' => $data["qty"][$i],
+                'tanggal' => $data["tanggal"][$i],
+            ]);
+        }
 
         return redirect()->route('brgmsk.index')->with('toast_success', 'Data Barang Masuk Telah ditambahkan bro');
     }
