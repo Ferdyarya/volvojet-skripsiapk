@@ -51,6 +51,7 @@
                                 <th class="border px-6 py-4">Qty</th>
                                 <th class="border px-6 py-4">Tanggal</th>
                                 <th class="border px-6 py-4">Total Harga</th>
+                                <th class="border px-6 py-4">Status</th>
                                 <th class="border px-6 py-4">Action</th>
                             </tr>
                         </thead>
@@ -66,7 +67,37 @@
                                 <td class="border px-6 py-4">{{ $item->qty }}</td>
                                 <td class="border px-6 py-4">{{ $item->tanggal }}</td>
                                 <td class="border px-6 py-4">Rp. {{ number_format($item->harga * $item->qty )}}</td>
-                                <td class="border px-6 py-4">{{ $item->status }}</td>
+                                <td class="border px-6 py-4">
+                                    @if ($item->status == 0)
+                                    @if (Auth::user()->hakAkses('superadmin'))
+                                    <form action="{{ route('validasisales', $item->id) }}" method="POST">
+                                        @csrf
+                                        @method('patch')
+                                        <select name="validasi"
+                                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                            id="grid-last-name">
+                                            <option value="">
+                                                Pending
+                                            </option>
+                                            <option value="ditolak">ditolak</option>
+                                            <option value="detujui">disetujui</option>
+                                        </select>
+                                        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">OK</button>
+                                    </form>
+                                    @else
+                                    <span class="badge badge-warning">Tunggu Verifikasi</span>
+                                    @endif
+                                    @else
+                                    <div class="text-center">
+                                        {!! $item->status == 'disetujui'
+                                        ? '<span class="">disetujui</span>'
+                                        : '<span class="">ditolak</span>' !!}
+                                    </div>
+                                    @endif
+
+                                </td>
+
+
                                 <td class="border px-6 py-4 text-center">
                                     <a href="{{ route('sales.edit', $item->id) }}"
                                         class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">Edit
@@ -84,7 +115,7 @@
                             @empty
 
                             <tr>
-                                <td colspan="6" class="border text-center p-5">
+                                <td colspan="10" class="border text-center p-5">
                                     Data Tidak Di Temukan
                                 </td>
                             </tr>
@@ -102,6 +133,28 @@
         </div>
     </div>
 
-    {{-- script --}}
+    @section('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.6-rc.1/dist/js/select2.min.js"></script>
     @include('sweetalert::alert')
+    <script>
+        $('.select2').select2({
+            placeholder: 'Status..'
+        });
+        $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+        $('#export-excel').on("click", function() {
+            $(this).addClass('disabled');
+            setTimeout(RemoveClass, 1000);
+        });
+
+        function RemoveClass() {
+            $('#export-excel').removeClass("disabled");
+        }
+    </script>
+    @endsection
+
+    {{-- script --}}
+
 </x-app-layout>

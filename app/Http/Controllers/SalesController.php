@@ -129,6 +129,18 @@ class SalesController extends Controller
 
     }
 
+    public function validasi(Request $request, $id)
+    {
+        $sales = Sales::find($id);
+        if ($request->has('validasi')) {
+            $sales->update([
+                'status' => $request->validasi
+            ]);
+        }
+
+        return redirect()->route('sales.index')->with('toast_success', 'Data Penjualan Sales telah berubah bro');
+    }
+
     /**
      * Remove the specified resource from storage.
      *

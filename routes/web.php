@@ -60,6 +60,9 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', 'admin'])->group(functio
     Route::resource('customermaster', CustomermasterController::class);
     Route::resource('salesmaster', SalesmasterController::class);
 
+    Route::patch('sales/{id}/validasi', [SalesController::class, 'validasi'])->name('validasisales');
+    // Route::patch('/cuti/{id}/validated', 'CutiController@validasi')->name('cuti.validated');
+
     // cetak PDF
     Route::get('exportpdf', [ProductController::class, 'exportpdf'])->name('exportpdf');
     Route::get('customerpdf', [CustomerController::class, 'customerpdf'])->name('customerpdf');
@@ -76,7 +79,7 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', 'admin'])->group(functio
 
     // HakAkses admin Service
     Route::group(['middleware'=>['auth','hakakses:adminservice']], function(){
-        
+
     });
 
     // HakAkses admin Warehouse

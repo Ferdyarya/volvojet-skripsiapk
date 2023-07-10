@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('harga');
             $table->integer('qty');
             $table->date('tanggal');
-            $table->date('status');
+            $table->string('status')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
