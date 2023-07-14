@@ -23,6 +23,7 @@ use App\Http\Controllers\SalesmasterController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\API\MidtransController;
 use App\Http\Controllers\CustomermasterController;
+use App\Http\Controllers\KirimEmailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,8 @@ use App\Http\Controllers\CustomermasterController;
 Route::get('/', function () {
     return redirect()->route('dashboard');
 });
+
+
 
 // dashboard Super Admin
 Route::prefix('dashboard')->middleware(['auth:sanctum', 'admin'])->group(function()
@@ -62,6 +65,7 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', 'admin'])->group(functio
 
     Route::patch('sales/{id}/validasi', [SalesController::class, 'validasi'])->name('validasisales');
     // Route::patch('/cuti/{id}/validated', 'CutiController@validasi')->name('cuti.validated');
+
 
     // cetak PDF
     Route::get('exportpdf', [ProductController::class, 'exportpdf'])->name('exportpdf');

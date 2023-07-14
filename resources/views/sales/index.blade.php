@@ -77,10 +77,10 @@
                                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                             id="grid-last-name">
                                             <option value="">
-                                                Pending
+                                                DataDicek
                                             </option>
-                                            <option value="ditolak">ditolak</option>
-                                            <option value="detujui">disetujui</option>
+                                            <option value="Pengiriman Tertunda">Pengiriman Tertunda</option>
+                                            <option value="Unit Segera dikirim">Unit Segera dikirim</option>
                                         </select>
                                         <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">OK</button>
                                     </form>
@@ -89,9 +89,9 @@
                                     @endif
                                     @else
                                     <div class="text-center">
-                                        {!! $item->status == 'disetujui'
-                                        ? '<span class="">disetujui</span>'
-                                        : '<span class="">ditolak</span>' !!}
+                                        {!! $item->status == 'Pengiriman Tertunda'
+                                        ? '<span class="">Pengiriman Tertunda</span>'
+                                        : '<span class="">Unit Segera dikirim</span>' !!}
                                     </div>
                                     @endif
 
@@ -102,7 +102,7 @@
                                     <a href="{{ route('sales.edit', $item->id) }}"
                                         class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">Edit
                                     </a>
-
+                                    
                                     <form action="{{ route('sales.destroy', $item->id) }}" method="POST"
                                         class="inline-block">
                                         {!! method_field('delete') . csrf_field() !!}
@@ -133,7 +133,7 @@
         </div>
     </div>
 
-    @section('scripts')
+    {{-- @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.6-rc.1/dist/js/select2.min.js"></script>
     @include('sweetalert::alert')
     <script>
@@ -153,7 +153,7 @@
             $('#export-excel').removeClass("disabled");
         }
     </script>
-    @endsection
+    @endsection --}}
 
     {{-- script --}}
 

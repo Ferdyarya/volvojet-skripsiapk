@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+use PDF;
 use App\Models\Unit;
 use App\Models\Sales;
+use App\Mail\KirimEmail;
 use App\Models\Salesmaster;
-use App\Models\Customermaster;
 use Illuminate\Http\Request;
-use PDF;
+use App\Models\Customermaster;
+use Illuminate\Support\Facades\Mail;
 
 class SalesController extends Controller
 {
@@ -64,6 +66,7 @@ class SalesController extends Controller
         $data = $request->all();
         $perulanganInput = count($data["id_salesmaster"]);
 
+
         for ($i=0; $i < $perulanganInput; $i++) {
             Sales::create([
                 'id_salesmaster' => $data["id_salesmaster"][$i],
@@ -72,7 +75,14 @@ class SalesController extends Controller
                 'harga' => $data["harga"][$i],
                 'qty' => $data["qty"][$i],
                 'tanggal' => $data["tanggal"][$i],
+
             ]);
+            $mailData = [
+                'title' => 'Dari PT. Indotruck Utama',
+                'body' => 'Terima kasih sudah membeli unit'
+            ];
+            $emailcustomer = Customermaster::find($data["id_customermaster"][$i]);
+            Mail::to($emailcustomer->email)->send(new KirimEmail($mailData));
         }
 
         return redirect()->route('sales.index')->with('toast_success', 'Data Penjualan Sales Service Telah ditambahkan bro');
