@@ -1,46 +1,10 @@
-{{--
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Data Productssss</title>
-</head>
-
-<body>
-    <h3 align="center">Data Product</h3>
-    <table align="center" border="1" cellpadding="10" cellspacing="0" id="productstyle">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Unit</th>
-                <th>Nama Barang</th>
-                <th>Harga</th>
-                <th>Qty</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($data as $item )
-            <tr>
-                <td class="border px-6 py-4">{{ $loop->iteration }}</td>
-                <td class="border px-6 py-4">{{ $item->unit->name }}</td>
-                <td class="border px-6 py-4">{{ $item->nama }}</td>
-                <td class="border px-6 py-4">Rp. {{ number_format($item->harga) }}</td>
-                <td class="border px-6 py-4">{{ $item->qty }}</td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-</body>
-
-</html> --}}
-
 <!DOCTYPE html>
 <html>
 
 <head>
     <style>
         #sales {
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'Times New Roman', Times, serif;
             border-collapse: collapse;
             width: 100%;
         }
@@ -63,42 +27,92 @@
             padding-top: 12px;
             padding-bottom: 12px;
             text-align: left;
-            background-color: #04AA6D;
+            background-color: #0423aa;
             color: white;
+            text-align: center;
+        }
+
+        /* Thick red border */
+        hr.new4 {
+            border: 1px solid rgb(0, 0, 0);
+        }
+
+        .kanan {
+            text-align: right;
+        }
+
+        .report-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .report-header img {
+            width: 150px;
+            height: 150px;
+        }
+
+        .company-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .address {
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .signature {
+            position: absolute;
+            bottom: 20px;
+            right: 50px;
+            font-size: 14px;
         }
     </style>
 </head>
 
 <body>
-
+    <div class="report-header">
+        <img src="{{ public_path("assets/logo.png") }}" alt="logo">
+        <center>
+            <h1 class="company-name">PT INDOTRUCK UTAMA BANJARMASIN</h1>
+            <p class="address">Jl. Ahmad Yani No.KM 6,7, RT.010/RW.001, Kertak Hanyar I, Kec. Kertak Hanyar, Kabupaten Banjar, Kalimantan Selatan 70654</p>
+        </center>
+    </div>
+    <hr class="new4">
     <center>
-        <h1 class="">Export Table Penjualan Sales</h1>
+        <h3 class="">Laporan Penjualan Sales</h3>
     </center>
 
     <table id="sales">
         <tr>
             <th>No</th>
+            <th>Tanggal</th>
             <th>Nama Sales</th>
             <th>Nama Customer Yang Beli</th>
             <th>Unit</th>
             <th>Qty</th>
             <th>Harga</th>
             <th>Total</th>
-            <th>Tanggal</th>
         </tr>
         @foreach ($data as $item )
         <tr>
             <td class="border px-6 py-4">{{ $loop->iteration }}</td>
+            <td class="border px-6 py-4">{{ $item->tanggal }}</td>
             <td class="border px-6 py-4">{{ $item->salesmaster->name }}</td>
             <td class="border px-6 py-4">{{ $item->customermaster->name }}</td>
             <td class="border px-6 py-4">{{ $item->unit->name }}</td>
             <td class="border px-6 py-4">{{ number_format($item->harga) }}</td>
             <td class="border px-6 py-4">{{ $item->qty }}</td>
             <td class="border px-6 py-4">{{ $item->harga * $item->qty }}</td>
-            <td class="border px-6 py-4">{{ $item->tanggal }}</td>
         </tr>
         @endforeach
     </table>
+    <p class="signature">(Supervisor/Kepala Bagian)</p>
 </body>
 
 </html>

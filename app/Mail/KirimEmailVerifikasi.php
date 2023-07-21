@@ -9,21 +9,18 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-
-
-class KirimEmail extends Mailable
+class KirimEmailVerifikasi extends Mailable
 {
     use Queueable, SerializesModels;
-    public $data_email;
-
+    public $data_emailverif;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data_email)
+    public function __construct($data_emailverif)
     {
-        $this->data_email = $data_email;
+        $this->data_emailverif = $data_emailverif;
     }
 
     /**
@@ -34,7 +31,7 @@ class KirimEmail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Pembelian Unit Dari PT Indotruck Utama Mohon Tunggu Verifikasi',
+            subject: 'Data Pembelian Unit Sudah Diverifikasi',
         );
     }
 
@@ -43,19 +40,11 @@ class KirimEmail extends Mailable
      *
      * @return \Illuminate\Mail\Mailables\Content
      */
-    public function content() : Content
+    public function content()
     {
-        // return $this->from($this->data_email['sender_name'])
-        //             ->subject($this->data_email['subject'])
-        //             ->view('mail.KirimEmail', ['isi' => $this->data_email['isi']]);
-
-        // Redirect atau memberikan respons setelah pengiriman email
-        // return redirect()->back()->with('success', 'Email telah dikirim');
-
         return new Content(
-            view: 'mail.KirimEmail',
+            view: 'mail.KirimEmailVerif',
         );
-
     }
 
     /**

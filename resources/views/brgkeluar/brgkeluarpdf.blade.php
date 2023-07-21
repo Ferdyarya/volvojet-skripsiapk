@@ -66,13 +66,29 @@
             background-color: #04AA6D;
             color: white;
         }
+
+        /* Thick red border */
+        hr.new4 {
+            border: 1px solid rgb(0, 0, 0);
+        }
     </style>
 </head>
 
 <body>
 
+    <div class="m-auto">
+        {{-- <a href=""></a> --}}
+        <center>
+            {{-- <td><img src="/uploads/kop.png" width="200px"></td> --}}
+            <h1>PT INDOTRUCK UTAMA BANJARMASIN</h1>
+            <h5>Jl. Ahmad Yani No.KM 6,7, RT.010/RW.001, Kertak Hanyar I, Kec.
+                Kertak
+                Hanyar, Kabupaten Banjar, Kalimantan Selatan 70654</h5>
+        </center>
+    </div>
+    <hr class="new4">
     <center>
-        <h1 class="">Export Table Barang Keluar</h1>
+        <h3 class="">Laporan Barang Keluar</h3>
     </center>
 
     <table id="keluar">
@@ -86,10 +102,10 @@
         @foreach ($data as $item )
         <tr>
             <td class="border px-6 py-4">{{ $loop->iteration }}</td>
+            <td class="border px-6 py-4">{{ $item->tanggal }}</td>
             <td class="border px-6 py-4">{{ $item->partkeluar }}</td>
             <td class="border px-6 py-4">{{ $item->customermaster->name }}</td>
             <td class="border px-6 py-4">{{ $item->qty }}</td>
-            <td class="border px-6 py-4">{{ $item->tanggal }}</td>
         </tr>
         @endforeach
     </table>

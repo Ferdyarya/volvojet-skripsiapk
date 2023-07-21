@@ -52,7 +52,10 @@
                                 <th class="border px-6 py-4">Tanggal</th>
                                 <th class="border px-6 py-4">Total Harga</th>
                                 <th class="border px-6 py-4">Status</th>
+                                @if (Auth::user()->hakAkses('adminsales'))
                                 <th class="border px-6 py-4">Action</th>
+                                @else
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -77,12 +80,13 @@
                                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                             id="grid-last-name">
                                             <option value="">
-                                                DataDicek
+                                                Keterangan :
                                             </option>
                                             <option value="Pengiriman Tertunda">Pengiriman Tertunda</option>
                                             <option value="Unit Segera dikirim">Unit Segera dikirim</option>
                                         </select>
-                                        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">OK</button>
+                                        <button type="submit"
+                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">OK</button>
                                     </form>
                                     @else
                                     <span class="badge badge-warning">Tunggu Verifikasi</span>
@@ -97,21 +101,28 @@
 
                                 </td>
 
-
+                                @if (Auth::user()->hakAkses('adminsales'))
+                                @if ($item->status == 0)
                                 <td class="border px-6 py-4 text-center">
                                     <a href="{{ route('sales.edit', $item->id) }}"
                                         class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">Edit
                                     </a>
-                                    
+
                                     <form action="{{ route('sales.destroy', $item->id) }}" method="POST"
                                         class="inline-block">
                                         {!! method_field('delete') . csrf_field() !!}
                                         <button type="submit"
                                             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-2 rounded">Delete</button>
                                     </form>
-
                                 </td>
+                                @else
+                                <td class="border px-6 py-4 text-center">
+                                    <p>Done</p>
+                                </td>
+                                @endif
                             </tr>
+                            @else
+                            @endif
                             @empty
 
                             <tr>

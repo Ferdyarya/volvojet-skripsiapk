@@ -27,6 +27,6 @@ class Sales extends Model
     }
     public function customermaster()
     {
-        return $this->hasOne(Customermaster::class, 'id', 'id_salesmaster');
+        return $this->hasOne(Customermaster::class, 'id', 'id_customermaster');
     }
 }

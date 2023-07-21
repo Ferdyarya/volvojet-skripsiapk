@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Mail\KirimanPending;
 use PDF;
 use App\Models\Unit;
 use App\Models\Sales;
 use App\Mail\KirimEmail;
+use App\Mail\KirimEmailVerifikasi;
 use App\Models\Salesmaster;
 use Illuminate\Http\Request;
 use App\Models\Customermaster;
@@ -21,7 +24,9 @@ class SalesController extends Controller
     {
 
         if($request->has('search')){
-            $sales = Sales::where('nama', 'LIKE', '%' .$request->search.'%')->paginate(10);
+            $sales = Sales::join('salesmasters', 'salesmasters.id', '=', 'sales.id_salesmaster')
+            ->where('salesmasters.name', 'LIKE', '%' . $request->search . '%')
+            ->paginate(10);
         }else{
             $sales = Sales::with(['unit', 'salesmaster','customermaster'])->paginate(10);
         }
@@ -79,7 +84,7 @@ class SalesController extends Controller
             ]);
             $mailData = [
                 'title' => 'Dari PT. Indotruck Utama',
-                'body' => 'Terima kasih sudah membeli unit'
+                'body' => 'Terima kasih sudah membeli unit Pesanan Anda Sedang Menunggu Di Verifikasi Pusat'
             ];
             $emailcustomer = Customermaster::find($data["id_customermaster"][$i]);
             Mail::to($emailcustomer->email)->send(new KirimEmail($mailData));
@@ -141,11 +146,30 @@ class SalesController extends Controller
 
     public function validasi(Request $request, $id)
     {
+
         $sales = Sales::find($id);
+        $email= $sales->customermaster->email;
         if ($request->has('validasi')) {
             $sales->update([
                 'status' => $request->validasi
             ]);
+
+
+            if ($sales->status === 'Unit Segera dikirim') {
+                $emailData = [
+                    'title' => 'Email Verifikasi - Unit Akan Dikirim',
+                    'body' => 'Unit Anda akan segera dikirim. Terima kasih atas pembelian Anda.'
+                ];
+                Mail::to($email)->send(new KirimEmailVerifikasi($emailData));
+            } elseif ($sales->status === 'Pengiriman Tertunda') {
+                $emailData = [
+                    'title' => 'Pengiriman Unit Tertunda',
+                    'body' => 'Mohon maaf, pengiriman unit Anda mengalami penundaan. Kami akan segera menghubungi Anda untuk memberikan informasi lebih lanjut.'
+                ];
+                Mail::to($email)->send(new KirimanPending($emailData));
+            }
+
+
         }
 
         return redirect()->route('sales.index')->with('toast_success', 'Data Penjualan Sales telah berubah bro');
