@@ -160,13 +160,13 @@ class SalesController extends Controller
                     'title' => 'Email Verifikasi - Unit Akan Dikirim',
                     'body' => 'Unit Anda akan segera dikirim. Terima kasih atas pembelian Anda.'
                 ];
-                Mail::to($email)->send(new KirimEmailVerifikasi($emailData));
+                Mail::to($email)->send(new KirimEmailVerifikasi($sales,$emailData));
             } elseif ($sales->status === 'Pengiriman Tertunda') {
                 $emailData = [
                     'title' => 'Pengiriman Unit Tertunda',
                     'body' => 'Mohon maaf, pengiriman unit Anda mengalami penundaan. Kami akan segera menghubungi Anda untuk memberikan informasi lebih lanjut.'
                 ];
-                Mail::to($email)->send(new KirimanPending($emailData));
+                Mail::to($email)->send(new KirimanPending($sales,$emailData));
             }
 
 

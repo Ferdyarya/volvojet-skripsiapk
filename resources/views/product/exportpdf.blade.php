@@ -1,106 +1,89 @@
-{{--
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Data Productssss</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
-    <h3 align="center">Data Product</h3>
-    <table align="center" border="1" cellpadding="10" cellspacing="0" id="productstyle">
+    <style type="text/css">
+        table tr td,
+        table tr th {
+            font-size: 9pt;
+        }
+
+        body {
+            font-family: arial;
+
+        }
+
+        table {
+            border-bottom: 4px solid #000;
+            padding: 2px
+        }
+
+        .tengah {
+            text-align: center;
+            line-height: 5px;
+        }
+
+        #warnatable th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #0423aa;
+            color: white;
+            text-align: center;
+        }
+
+        .signature {
+            position: absolute;
+            bottom: 20px;
+            right: 50px;
+            font-size: 14px;
+        }
+    </style>
+
+    <div class="rangkasurat">
+        <table width="100%">
+            <tr>
+                <td><img src="{{ public_path ('assets/logo.png')}}" alt="logo" width="140px"></td>
+                <td class="tengah">
+                    <h4>PT. INDOTRUCK UTAMA BANJARMASIN</h4>
+                    <p>Jl. Ahmad Yani No.KM 6,7, RT.010/RW.001, Kertak Hanyar I, Kec. Kertak Hanyar, Kalimantan Selatan 70654</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <center>
+        <h5>Laporan Part Order For Service
+
+        </h5>
+    </center>
+
+
+
+    <br>
+
+    <table class='table table-bordered' id="warnatable">
         <thead>
             <tr>
                 <th>No</th>
+                <th>Supplier Yang Diminta</th>
                 <th>Unit</th>
                 <th>Nama Barang</th>
                 <th>Harga</th>
                 <th>Qty</th>
+                <th>Tanggal</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($data as $item )
-            <tr>
-                <td class="border px-6 py-4">{{ $loop->iteration }}</td>
-                <td class="border px-6 py-4">{{ $item->unit->name }}</td>
-                <td class="border px-6 py-4">{{ $item->nama }}</td>
-                <td class="border px-6 py-4">Rp. {{ number_format($item->harga) }}</td>
-                <td class="border px-6 py-4">{{ $item->qty }}</td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-</body>
+            {{-- @php
+        $grandTotal = 0;
+        @endphp --}}
 
-</html> --}}
-
-<!DOCTYPE html>
-<html>
-
-<head>
-    <style>
-        #products {
-            font-family: Arial, Helvetica, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        #products td,
-        #products th {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-
-        #products tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        #products tr:hover {
-            background-color: #ddd;
-        }
-
-        #products th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: left;
-            background-color: #04AA6D;
-            color: white;
-        }
-
-        /* Thick red border */
-        hr.new4 {
-            border: 1px solid rgb(0, 0, 0);
-        }
-    </style>
-</head>
-
-<body>
-
-    <div class="m-auto">
-        {{-- <a href=""></a> --}}
-        <center>
-            {{-- <td><img src="/uploads/kop.png" width="200px"></td> --}}
-            <h1>PT INDOTRUCK UTAMA BANJARMASIN</h1>
-            <h5>Jl. Ahmad Yani No.KM 6,7, RT.010/RW.001, Kertak Hanyar I, Kec.
-                Kertak
-                Hanyar, Kabupaten Banjar, Kalimantan Selatan 70654</h5>
-        </center>
-    </div>
-    <hr class="new4">
-    <center>
-        <h3 class="">Laporan Part Order For Service</h3>
-    </center>
-
-    <table id="products">
-        <tr>
-            <th>No</th>
-            <th>Supplier Yang Diminta</th>
-            <th>Unit</th>
-            <th>Nama Barang</th>
-            <th>Harga</th>
-            <th>Qty</th>
-            <th>Tanggal</th>
-        </tr>
         @foreach ($data as $item )
         <tr>
             <td class="border px-6 py-4">{{ $loop->iteration }}</td>
@@ -111,7 +94,13 @@
             <td class="border px-6 py-4">{{ $item->qty }}</td>
         </tr>
         @endforeach
+        {{-- <tr>
+            <td colspan="7">Grand Total</td>
+            <td>Rp. {{ number_format($grandTotal)}}</td>
+        </tr> --}}
+        </tbody>
     </table>
+    <p class="signature">(Supervisor/Kepala Bagian)</p>
 </body>
 
 </html>

@@ -2,67 +2,38 @@
 <html>
 
 <head>
-    <style>
-        #sales {
-            font-family: 'Times New Roman', Times, serif;
-            border-collapse: collapse;
-            width: 100%;
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <style type="text/css">
+        table tr td,
+        table tr th {
+            font-size: 9pt;
         }
 
-        #sales td,
-        #sales th {
-            border: 1px solid #ddd;
-            padding: 8px;
+        body {
+            font-family: arial;
+
         }
 
-        #sales tr:nth-child(even) {
-            background-color: #f2f2f2;
+        table {
+            border-bottom: 4px solid #000;
+            padding: 2px
         }
 
-        #sales tr:hover {
-            background-color: #ddd;
+        .tengah {
+            text-align: center;
+            line-height: 5px;
         }
 
-        #sales th {
+        #products th {
             padding-top: 12px;
             padding-bottom: 12px;
             text-align: left;
             background-color: #0423aa;
             color: white;
-            text-align: center;
-        }
-
-        /* Thick red border */
-        hr.new4 {
-            border: 1px solid rgb(0, 0, 0);
-        }
-
-        .kanan {
-            text-align: right;
-        }
-
-        .report-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-
-        .report-header img {
-            width: 150px;
-            height: 150px;
-        }
-
-        .company-name {
-            font-size: 24px;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        .address {
-            font-size: 14px;
             text-align: center;
         }
 
@@ -73,32 +44,47 @@
             font-size: 14px;
         }
     </style>
-</head>
 
-<body>
-    <div class="report-header">
-        <img src="{{ public_path("assets/logo.png") }}" alt="logo">
-        <center>
-            <h1 class="company-name">PT INDOTRUCK UTAMA BANJARMASIN</h1>
-            <p class="address">Jl. Ahmad Yani No.KM 6,7, RT.010/RW.001, Kertak Hanyar I, Kec. Kertak Hanyar, Kabupaten Banjar, Kalimantan Selatan 70654</p>
-        </center>
+    <div class="rangkasurat">
+        <table width="100%">
+            <tr>
+                <td><img src="{{ public_path ('assets/logo.png')}}" alt="logo" width="140px"></td>
+                <td class="tengah">
+                    <h4>PT. INDOTRUCK UTAMA BANJARMASIN</h4>
+                    <p>Jl. Ahmad Yani No.KM 6,7, RT.010/RW.001, Kertak Hanyar I, Kec. Kertak Hanyar, Kalimantan Selatan 70654</p>
+                </td>
+            </tr>
+        </table>
     </div>
-    <hr class="new4">
+
     <center>
-        <h3 class="">Laporan Penjualan Sales</h3>
+        <h5>Laporan Penjualan Sales Unit
+
+        </h5>
     </center>
 
-    <table id="sales">
-        <tr>
-            <th>No</th>
-            <th>Tanggal</th>
-            <th>Nama Sales</th>
-            <th>Nama Customer Yang Beli</th>
-            <th>Unit</th>
-            <th>Qty</th>
-            <th>Harga</th>
-            <th>Total</th>
-        </tr>
+
+
+    <br>
+
+    <table class='table table-bordered' id="products">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Tanggal</th>
+                <th>Nama Sales</th>
+                <th>Nama Customer Yang Beli</th>
+                <th>Unit</th>
+                <th>Qty</th>
+                <th>Harga</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @php
+        $grandTotal = 0;
+        @endphp
+
         @foreach ($data as $item )
         <tr>
             <td class="border px-6 py-4">{{ $loop->iteration }}</td>
@@ -106,11 +92,22 @@
             <td class="border px-6 py-4">{{ $item->salesmaster->name }}</td>
             <td class="border px-6 py-4">{{ $item->customermaster->name }}</td>
             <td class="border px-6 py-4">{{ $item->unit->name }}</td>
-            <td class="border px-6 py-4">{{ number_format($item->harga) }}</td>
             <td class="border px-6 py-4">{{ $item->qty }}</td>
-            <td class="border px-6 py-4">{{ $item->harga * $item->qty }}</td>
+            <td class="border px-6 py-4">Rp. {{ number_format($item->harga) }}</td>
+
+            @php
+            $subTotal = $item->harga * $item->qty;
+            $grandTotal += $subTotal
+            @endphp
+
+            <td class="border px-6 py-4">Rp. {{number_format ($subTotal) }}</td>
         </tr>
         @endforeach
+        <tr>
+            <td colspan="7">Grand Total</td>
+            <td>Rp. {{ number_format($grandTotal)}}</td>
+        </tr>
+        </tbody>
     </table>
     <p class="signature">(Supervisor/Kepala Bagian)</p>
 </body>

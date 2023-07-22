@@ -1,32 +1,20 @@
-@component('mail::message')
+{{-- @component('mail::message') --}}
     <h3>Data Pesanan Anda Sudah Di Verifikasi dan akan segera dikirimkan dari pusat PT INDOTRUCK UTAMA SINGAPURA</h3>
 
-    <table>
         <p>Berikut data yang telah dibeli</p>
-        <tr>
-            <th>No</th>
-            <th>Tanggal</th>
-            <th>Nama Sales</th>
-            <th>Nama Customer Yang Beli</th>
-            <th>Unit</th>
-            <th>Qty</th>
-            <th>Harga</th>
-            <th>Total</th>
-        </tr>
+        <br>
+        <div>
+            <p>Tanggal : {{ $sales->tanggal }}</p>
+            <p>Nama Sales : {{ $sales->salesmaster->name }}</p>
+            <p>Nama Customer Yang Beli : {{ $sales->customermaster->name }}</p>
+            <p>Unit : {{ $sales->unit->name }}</p>
+            <p>Qty : {{ $sales->qty }}</p>
+            <p>Harga : {{ number_format($sales->harga) }}</p>
+            <p>Total : {{ $sales->harga * $sales->qty }}</p>
+        </div>
+    <br>
+    <p>Terima kasih atas pesanan Anda!</p>
 
-        <tr>
-            <td class="border px-6 py-4">{{ $sales->tanggal }}</td>
-            <td class="border px-6 py-4">{{ $sales->salesmaster->name }}</td>
-            <td class="border px-6 py-4">{{ $sales->customermaster->name }}</td>
-            <td class="border px-6 py-4">{{ $sales->unit->name }}</td>
-            <td class="border px-6 py-4">{{ $sales->qty }}</td>
-            <td class="border px-6 py-4">{{ number_format($sales->harga) }}</td>
-            <td class="border px-6 py-4">{{ $sales->harga * $sales->qty }}</td>
-        </tr>
-    </table>
-
-    Terima kasih atas pesanan Anda!
-
-    Salam,
-    {{ config('app.name') }}
-@endcomponent
+    <p>Salam, Admins Sales PT INDOTRUCK UTAMA</p>
+    {{-- {{ config('app.name') }} --}}
+{{-- @endcomponent --}}

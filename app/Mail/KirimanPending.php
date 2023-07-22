@@ -2,25 +2,29 @@
 
 namespace App\Mail;
 
+use App\Models\Sales;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class KirimanPending extends Mailable
 {
     use Queueable, SerializesModels;
     public $data_emailpending;
+    public $sales;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data_emailpending)
+    public function __construct(Sales $sales, $data_emailpending)
     {
+        $this->sales = $sales;
         $this->data_emailpending = $data_emailpending;
+
     }
 
     /**

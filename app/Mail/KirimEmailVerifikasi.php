@@ -2,24 +2,27 @@
 
 namespace App\Mail;
 
+use App\Models\Sales;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class KirimEmailVerifikasi extends Mailable
 {
     use Queueable, SerializesModels;
     public $data_emailverif;
+    public $sales;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data_emailverif)
+    public function __construct(Sales $sales, $data_emailverif)
     {
+        $this->sales = $sales;
         $this->data_emailverif = $data_emailverif;
     }
 
@@ -45,6 +48,8 @@ class KirimEmailVerifikasi extends Mailable
         return new Content(
             view: 'mail.KirimEmailVerif',
         );
+
+
     }
 
     /**
