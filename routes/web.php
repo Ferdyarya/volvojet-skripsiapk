@@ -63,6 +63,12 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', 'admin'])->group(functio
     Route::resource('customermaster', CustomermasterController::class);
     Route::resource('salesmaster', SalesmasterController::class);
 
+    // Recap Laporan Sales Views
+    Route::resource('perbulan', SalesController::class);
+    Route::resource('pernama', SalesController::class);
+    Route::resource('notapembelian', SalesController::class);
+
+    // Validasi
     Route::patch('sales/{id}/validasi', [SalesController::class, 'validasi'])->name('validasisales');
     // Route::patch('/cuti/{id}/validated', 'CutiController@validasi')->name('cuti.validated');
 

@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\KirimanPending;
 use PDF;
 use App\Models\Unit;
 use App\Models\Sales;
 use App\Mail\KirimEmail;
-use App\Mail\KirimEmailVerifikasi;
 use App\Models\Salesmaster;
+use App\Mail\KirimanPending;
 use Illuminate\Http\Request;
 use App\Models\Customermaster;
+use App\Mail\KirimEmailVerifikasi;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class SalesController extends Controller
@@ -197,4 +198,76 @@ class SalesController extends Controller
     	$pdf = PDF::loadview('sales/salespdf', ['data' => $data]);
         return $pdf->download('laporan_sales.pdf');
     }
+
+    // REKAP SALES REPORT
+    public function perbulan(Request $request)
+    {
+        $f = $request->filter ?? null;
+
+        $data['title'] = "Laporan Rekap Bulanan";
+        $data['sales'] = sales::all();
+        if($f == '' || $f == 'all')
+        {
+            $data['sales'] = sales::all();
+        }
+        else
+        {
+            $data['sales'] = sales::where('customer', $f)->get();
+        }
+        $data['id_customermaster'] = sales::groupBy( 'id_customermaster' )
+                ->orderBy( 'id_customermaster' )
+                ->select(DB::raw('count(*) as count, id_customermaster'))
+                ->get();
+        $data['filter'] = $f;
+        return view('laporansales.perbulan', $data);
+
+    }
+
+    public function pernama(Request $request)
+    {
+        $f = $request->filter ?? null;
+
+        $data['title'] = "Laporan Penjualan Persales";
+        $data['sales'] = sales::all();
+        if($f == '' || $f == 'all')
+        {
+            $data['sales'] = sales::all();
+        }
+        else
+        {
+            $data['sales'] = sales::where('id_salesmaster', $f)->get();
+        }
+        $data['id_salesmaster'] = sales::groupBy( 'id_salesmaster' )
+                ->orderBy( 'departement_id' )
+                ->select(DB::raw('count(*) as count, id_salesmaster'))
+                ->get();
+        $data['filter'] = $f;
+        return view('laporansales.pernama', $data);
+
+    }
+
+    public function notapembelian(Request $request)
+    {
+        $f = $request->filter ?? null;
+
+        $data['title'] = "Laporan Nota Pembelian";
+        $data['sales'] = sales::all();
+        if($f == '' || $f == 'all')
+        {
+            $data['sales'] = sales::all();
+        }
+        else
+        {
+            $data['sales'] = sales::where('id_customermaster', $f)->get();
+        }
+        $data['id_customermaster'] = sales::groupBy( 'id_customermaster' )
+                ->orderBy( 'id_customermaster' )
+                ->select(DB::raw('count(*) as count, id_customermaster'))
+                ->get();
+        $data['filter'] = $f;
+        return view('laporansales.notapembelian', $data);
+
+    }
+
+
 }

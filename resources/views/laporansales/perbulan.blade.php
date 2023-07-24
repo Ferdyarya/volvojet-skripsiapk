@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Penjualan Sales') }}
+            {{ __('Recap Penjualan Sales Perbulan') }}
         </h2>
     </x-slot>
 
@@ -9,9 +9,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="mb-3">
-                    <a href="{{ route('sales.create') }}"
+                    {{-- <a href="{{ route('sales.create') }}"
                         class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Create Penjualan
-                        Sales</a>
+                        Sales</a> --}}
                     <a href="{{ route('salespdf') }}"
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Export PDF</a>
                     <div class="flex justify-start mt-7">
@@ -143,29 +143,5 @@
 
         </div>
     </div>
-
-    {{-- @section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.6-rc.1/dist/js/select2.min.js"></script>
-    @include('sweetalert::alert')
-    <script>
-        $('.select2').select2({
-            placeholder: 'Status..'
-        });
-        $(document).ready(function() {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-
-        $('#export-excel').on("click", function() {
-            $(this).addClass('disabled');
-            setTimeout(RemoveClass, 1000);
-        });
-
-        function RemoveClass() {
-            $('#export-excel').removeClass("disabled");
-        }
-    </script>
-    @endsection --}}
-
-    {{-- script --}}
 
 </x-app-layout>
