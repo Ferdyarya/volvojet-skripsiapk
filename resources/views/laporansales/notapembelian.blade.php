@@ -12,12 +12,20 @@
                     {{-- <a href="{{ route('sales.create') }}"
                         class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Create Penjualan
                         Sales</a> --}}
-                    <a href="{{ route('salespdf') }}"
+                    @if (!empty($filter))
+                    <a href="{{ route('notapembelianpdf', $filter) }}"
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Export PDF</a>
-                    <div class="flex justify-start mt-7">
-                        <div class=" xl:w-96 ">
-                            <form action="sales" method="GET">
-                                <input type="search" name="search" class="
+                    <div class="flex justify-end mt-7">
+                        @else
+                        <a href="{{ route('notapembelianpdf','all') }}"
+                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Export PDF</a>
+                        <div class="flex justify-end mt-7">
+                            @endif
+
+
+                            {{-- <div class=" xl:w-96 ">
+                                <form action="pernama" method="GET">
+                                    <input type="search" name="search" class="
                                           form-control
                                           block
                                           w-full
@@ -34,7 +42,33 @@
                                           m-0
                                           focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
                                         " id="search" placeholder="Search" />
-                            </form>
+                                </form>
+                            </div> --}}
+
+                            <div class=" xl:w-96 ">
+                                <div class="float-right row">
+                                    <form action="{{ url()->current() }}">
+                                        <div class="input-group">
+                                            <select name="filter" class="form-control input-sm select2 rounded-xl">
+                                                <option value="">FILTER</option>
+                                                @if (!empty($filter))
+                                                <option value="all">SHOW ALL</option>
+                                                @endif
+                                                @foreach ($sales as $item)
+                                                <option value="{{ $item->id_customermaster }}" {{ $item->id_customermaster ==
+                                                    old('filter', $filter) ? 'selected' : '' }}>
+                                                    {{ strtoupper($item->customermaster->name) }}</option>
+                                                @endforeach
+                                            </select>
+                                            <div class="input-group-append mt-2">
+                                                <button type="submit" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300
+                                                    font-medium rounded-lg text-sm px-4 py-2.5 mr-2 mb-2 dark:bg-green-600
+                                                    dark:hover:bg-green-700 dark:focus:ring-green-800">Submit</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -44,14 +78,14 @@
                         <thead>
                             <tr>
                                 <th class="border px-6 py-4">No</th>
-                                <th class="border px-6 py-4">Nama Sales</th>
+                                {{-- <th class="border px-6 py-4">Nama Sales</th> --}}
                                 <th class="border px-6 py-4">Customer Yang Beli</th>
-                                <th class="border px-6 py-4">Unit Dijual</th>
+                                <th class="border px-6 py-4">Unit Dibeli</th>
                                 <th class="border px-6 py-4">Harga Unit</th>
                                 <th class="border px-6 py-4">Qty</th>
                                 <th class="border px-6 py-4">Tanggal</th>
                                 <th class="border px-6 py-4">Total Harga</th>
-                                <th class="border px-6 py-4">Status</th>
+                                {{-- <th class="border px-6 py-4">Status</th> --}}
                                 @if (Auth::user()->hakAkses('adminsales'))
                                 <th class="border px-6 py-4">Action</th>
                                 @else
@@ -62,7 +96,7 @@
                             @forelse ($sales as $item)
                             <tr>
                                 <td class="border px-6 py-4">{{ $loop->iteration }}</td>
-                                <td class="border px-6 py-4">{{ $item->salesmaster->name }}</td>
+                                {{-- <td class="border px-6 py-4">{{ $item->salesmaster->name }}</td> --}}
                                 <td class="border px-6 py-4">{{ $item->customermaster->name }}</td>
                                 <td class="border px-6 py-4">{{ $item->unit->name }}</td>
                                 {{-- <td class="border px-6 py-4">{{ $item->gambar }}</td> --}}
@@ -70,7 +104,7 @@
                                 <td class="border px-6 py-4">{{ $item->qty }}</td>
                                 <td class="border px-6 py-4">{{ $item->tanggal }}</td>
                                 <td class="border px-6 py-4">Rp. {{ number_format($item->harga * $item->qty )}}</td>
-                                <td class="border px-6 py-4">
+                                {{-- <td class="border px-6 py-4">
                                     @if ($item->status == 0)
                                     @if (Auth::user()->hakAkses('superadmin'))
                                     <form action="{{ route('validasisales', $item->id) }}" method="POST">
@@ -99,7 +133,7 @@
                                     </div>
                                     @endif
 
-                                </td>
+                                </td> --}}
 
                                 @if (Auth::user()->hakAkses('adminsales'))
                                 @if ($item->status == 0)
@@ -143,5 +177,7 @@
 
         </div>
     </div>
+
+
 
 </x-app-layout>

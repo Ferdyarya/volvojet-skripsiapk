@@ -64,9 +64,16 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', 'admin'])->group(functio
     Route::resource('salesmaster', SalesmasterController::class);
 
     // Recap Laporan Sales Views
-    Route::resource('perbulan', SalesController::class);
-    Route::resource('pernama', SalesController::class);
-    Route::resource('notapembelian', SalesController::class);
+    Route::get('laporansales/pernama', [SalesController::class, 'pernama'])->name('pernama');
+    Route::get('laporansales/perbulan', [SalesController::class, 'perbulan'])->name('perbulan');
+    Route::get('laporansales/notapembelian', [SalesController::class, 'notapembelian'])->name('notapembelian');
+
+    // Report Recap laporan sales PDF
+    Route::get('notapembelianpdf', [SalesController::class, 'notapembelianpdf'])->name('notapembelianpdf');
+    Route::get('pernamapdf', [SalesController::class, 'pernamapdf'])->name('pernamapdf');
+    // Route::get('laporansales/pernama', ['SalesController@pernama'])->name('laporansales.pernama');
+    // Route::get('laporansales/perbulan', ['SalesController@perbulan'])->name('laporansales.perbulan');
+    // Route::get('laporansales/notapembelian', ['SalesController@notapembelian'])->name('laporansales.notapembelian');
 
     // Validasi
     Route::patch('sales/{id}/validasi', [SalesController::class, 'validasi'])->name('validasisales');
@@ -82,6 +89,7 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', 'admin'])->group(functio
     Route::get('custorderpdf', [CustorderController::class, 'custorderpdf'])->name('custorderpdf');
     Route::get('transorderpdf', [TransorderController::class, 'transorderpdf'])->name('transorderpdf');
     Route::get('partreturpdf', [PartreturController::class, 'partreturpdf'])->name('partreturpdf');
+
 
     // update status transaction
     Route::get('tranasctions/{id}/status/{status} ', [TransactionController::class, 'changeStatus'])->name('transaction.changeStatus');

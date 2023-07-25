@@ -199,22 +199,73 @@ class SalesController extends Controller
         return $pdf->download('laporan_sales.pdf');
     }
 
-    // REKAP SALES REPORT
+    public function notapembelianpdf()
+    {
+
+        $f = $filter ?? null;
+        $data['sales'] = Sales::all();
+        if($f == '' || $f == 'all')
+        {
+            $data['sales'] = Sales::all();
+        }
+        else
+        {
+            $data['sales'] = Sales::where('id_customermaster', $f)->get();
+        }
+        $data['id_customermaster'] = Sales::groupBy( 'id_customermaster' )
+                ->orderBy( 'id_customermaster' )
+                ->select(DB::raw('count(*) as count, id_customermaster'))
+                ->get();
+        return $data['filter'] = $f;
+
+        // $customPaper = array(0,0,500,700);
+        $pdf = PDF::loadview('laporansales/pernamapdf', $data);
+    	return $pdf->download('laporan-pernama.pdf');
+    }
+
+    public function pernamapdf()
+    {
+
+        $f = $filter ?? null;
+        // $data['title'] = "Laporan Karyawan";
+        $data['sales'] = Sales::all();
+        if($f == '' || $f == 'all')
+        {
+            $data['sales'] = Sales::all();
+        }
+        else
+        {
+            $data['sales'] = Sales::where('id_salesmaster', $f)->get();
+        }
+        $data['id_salesmaster'] = Sales::groupBy( 'id_salesmaster' )
+                ->orderBy( 'id_salesmaster' )
+                ->select(DB::raw('count(*) as count, id_salesmaster'))
+                ->get();
+        return $data['filter'] = $f;
+
+        // $customPaper = array(0,0,500,700);
+        $pdf = PDF::loadview('laporansales/pernamapdf', $data);
+    	return $pdf->download('laporan-pernama.pdf');
+    }
+
+
+
+    /* // REKAP SALES REPORT
     public function perbulan(Request $request)
     {
         $f = $request->filter ?? null;
 
         $data['title'] = "Laporan Rekap Bulanan";
-        $data['sales'] = sales::all();
+        $data['sales'] = Sales::all();
         if($f == '' || $f == 'all')
         {
-            $data['sales'] = sales::all();
+            $data['sales'] = Sales::all();
         }
         else
         {
-            $data['sales'] = sales::where('customer', $f)->get();
+            $data['sales'] = Sales::where('customer', $f)->get();
         }
-        $data['id_customermaster'] = sales::groupBy( 'id_customermaster' )
+        $data['id_customermaster'] = Sales::groupBy( 'id_customermaster' )
                 ->orderBy( 'id_customermaster' )
                 ->select(DB::raw('count(*) as count, id_customermaster'))
                 ->get();
@@ -228,17 +279,17 @@ class SalesController extends Controller
         $f = $request->filter ?? null;
 
         $data['title'] = "Laporan Penjualan Persales";
-        $data['sales'] = sales::all();
+        $data['sales'] = Sales::all();
         if($f == '' || $f == 'all')
         {
-            $data['sales'] = sales::all();
+            $data['sales'] = Sales::all();
         }
         else
         {
-            $data['sales'] = sales::where('id_salesmaster', $f)->get();
+            $data['sales'] = Sales::where('id_salesmaster', $f)->get();
         }
-        $data['id_salesmaster'] = sales::groupBy( 'id_salesmaster' )
-                ->orderBy( 'departement_id' )
+        $data['id_salesmaster'] = Sales::groupBy( 'id_salesmaster' )
+                ->orderBy( 'id_salesmaster' )
                 ->select(DB::raw('count(*) as count, id_salesmaster'))
                 ->get();
         $data['filter'] = $f;
@@ -251,23 +302,88 @@ class SalesController extends Controller
         $f = $request->filter ?? null;
 
         $data['title'] = "Laporan Nota Pembelian";
-        $data['sales'] = sales::all();
+        $data['sales'] = Sales::all();
         if($f == '' || $f == 'all')
         {
-            $data['sales'] = sales::all();
+            $data['sales'] = Sales::all();
         }
         else
         {
-            $data['sales'] = sales::where('id_customermaster', $f)->get();
+            $data['sales'] = Sales::where('id_customermaster', $f)->get();
         }
-        $data['id_customermaster'] = sales::groupBy( 'id_customermaster' )
+        $data['id_customermaster'] = Sales::groupBy( 'id_customermaster' )
                 ->orderBy( 'id_customermaster' )
                 ->select(DB::raw('count(*) as count, id_customermaster'))
                 ->get();
         $data['filter'] = $f;
         return view('laporansales.notapembelian', $data);
 
+    } */
+
+    // REKAP SALES REPORT
+    public function perbulan(Request $request)
+    {
+        $f = $request->filter ?? null;
+
+
+        $data['title'] = "Laporan Rekap Bulanan";
+
+        if ($f == '' || $f == 'all') {
+            $data['sales'] = Sales::paginate(10); // Use paginate() to enable pagination
+        } else {
+            $data['sales'] = Sales::where('customer', $f)->paginate(10); // Use paginate() here as well
+        }
+
+        $data['id_customermaster'] = Sales::groupBy('id_customermaster')
+            ->orderBy('id_customermaster')
+            ->select(DB::raw('count(*) as count, id_customermaster'))
+            ->get();
+
+        $data['filter'] = $f;
+        return view('laporansales.perbulan', $data);
     }
 
+    public function pernama(Request $request)
+    {
+        $f = $request->filter ?? null;
+
+        // $data['title'] = "Laporan Penjualan Persales";
+
+        if ($f == '' || $f == 'all') {
+            $sales['sales'] = Sales::paginate(10); // Use paginate() to enable pagination
+        } else {
+            $sales['sales'] = Sales::where('id_salesmaster', $f)->paginate(10); // Use paginate() here as well
+        }
+
+        $sales['id_salesmaster'] = Sales::groupBy('id_salesmaster')
+            ->orderBy('id_salesmaster')
+            ->select(DB::raw('count(*) as count, id_salesmaster'))
+            ->get();
+
+         $sales['filter'] = $f;
+        //  return $sales;
+        return view('laporansales.pernama', $sales);
+    }
+
+    public function notapembelian(Request $request)
+    {
+        $f = $request->filter ?? null;
+
+        $data['title'] = "Laporan Nota Pembelian";
+
+        if ($f == '' || $f == 'all') {
+            $data['sales'] = Sales::paginate(10); // Use paginate() to enable pagination
+        } else {
+            $data['sales'] = Sales::where('id_customermaster', $f)->paginate(10); // Use paginate() here as well
+        }
+
+        $data['id_customermaster'] = Sales::groupBy('id_customermaster')
+            ->orderBy('id_customermaster')
+            ->select(DB::raw('count(*) as count, id_customermaster'))
+            ->get();
+
+        $data['filter'] = $f;
+        return view('laporansales.notapembelian', $data);
+    }
 
 }

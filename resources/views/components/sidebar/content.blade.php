@@ -213,7 +213,7 @@
         <li>
             <div
                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                <x-jet-nav-link href="{{ route('laporansales.pernama') }}" :active="request()->routeIs('laporansales.pernama')">
+                <x-jet-nav-link href="{{ route('pernama') }}" :active="request()->routeIs('pernama')">
                     {{ __('Rekap Penjualan Sales Berdasarkan Nama') }}
                 </x-jet-nav-link>
             </div>
@@ -224,7 +224,7 @@
         <li>
             <div
                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                <x-jet-nav-link href="{{ route('laporansales.perbulan') }}" :active="request()->routeIs('laporansales.perbulan')">
+                <x-jet-nav-link href="{{ route('perbulan') }}" :active="request()->routeIs('perbulan')">
                     {{ __('Rekap Penjualan Sales Pertahun/Perbulan') }}
                 </x-jet-nav-link>
             </div>
@@ -235,7 +235,7 @@
         <li>
             <div
                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                <x-jet-nav-link href="{{ route('laporansales.notapembelian') }}" :active="request()->routeIs('laporansales.notapembelian')">
+                <x-jet-nav-link href="{{ route('notapembelian') }}" :active="request()->routeIs('notapembelian')">
                     {{ __('Report Nota Pembelian') }}
                 </x-jet-nav-link>
             </div>
