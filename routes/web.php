@@ -69,8 +69,10 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', 'admin'])->group(functio
     Route::get('laporansales/notapembelian', [SalesController::class, 'notapembelian'])->name('notapembelian');
 
     // Report Recap laporan sales PDF
-    Route::get('notapembelianpdf', [SalesController::class, 'notapembelianpdf'])->name('notapembelianpdf');
-    Route::get('pernamapdf', [SalesController::class, 'pernamapdf'])->name('pernamapdf');
+    Route::get('notapembelianpdf/{filter}', [SalesController::class, 'notapembelianpdf'])->name('notapembelianpdf');
+    Route::get('notapembelianpdfid/{id}', [SalesController::class, 'notapembelianpdfid'])->name('notapembelianpdfid');
+    Route::get('pernamapdf/{filter}', [SalesController::class, 'pernamapdf'])->name('pernamapdf');
+    Route::get('perbulanpdf/{filter}', [SalesController::class, 'perbulanpdf'])->name('perbulanpdf');
     // Route::get('laporansales/pernama', ['SalesController@pernama'])->name('laporansales.pernama');
     // Route::get('laporansales/perbulan', ['SalesController@perbulan'])->name('laporansales.perbulan');
     // Route::get('laporansales/notapembelian', ['SalesController@notapembelian'])->name('laporansales.notapembelian');

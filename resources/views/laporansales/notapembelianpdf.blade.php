@@ -43,6 +43,13 @@
             right: 50px;
             font-size: 14px;
         }
+
+        .date-container {
+            font-family: arial;
+            text-align: left;
+            font-size: 10px;
+
+        }
     </style>
 
     <div class="rangkasurat">
@@ -51,7 +58,8 @@
                 <td><img src="{{ public_path ('assets/logo.png')}}" alt="logo" width="140px"></td>
                 <td class="tengah">
                     <h4>PT. INDOTRUCK UTAMA BANJARMASIN</h4>
-                    <p>Jl. Ahmad Yani No.KM 6,7, RT.010/RW.001, Kertak Hanyar I, Kec. Kertak Hanyar, Kalimantan Selatan 70654</p>
+                    <p>Jl. Ahmad Yani No.KM 6,7, RT.010/RW.001, Kertak Hanyar I, Kec. Kertak Hanyar, Kalimantan Selatan
+                        70654</p>
                 </td>
             </tr>
         </table>
@@ -59,6 +67,7 @@
 
     <center>
         <h5>Nota Pembelian Unit Customer
+
 
         </h5>
     </center>
@@ -72,6 +81,7 @@
             <tr>
                 <th>No</th>
                 <th>Tanggal</th>
+                <th class="border px-6 py-4">Id Transaksi</th>
                 {{-- <th>Nama Sales</th> --}}
                 <th>Nama Customer Yang Beli</th>
                 <th>Unit yang dibeli</th>
@@ -82,33 +92,37 @@
         </thead>
         <tbody>
             @php
-        $grandTotal = 0;
-        @endphp
-
-        @foreach ($sales as $item )
-        <tr>
-            <td class="border px-6 py-4">{{ $loop->iteration }}</td>
-            <td class="border px-6 py-4">{{ $item->tanggal }}</td>
-            {{-- <td class="border px-6 py-4">{{ $item->salesmaster->name }}</td> --}}
-            <td class="border px-6 py-4">{{ $item->customermaster->name }}</td>
-            <td class="border px-6 py-4">{{ $item->unit->name }}</td>
-            <td class="border px-6 py-4">{{ $item->qty }}</td>
-            <td class="border px-6 py-4">Rp. {{ number_format($item->harga) }}</td>
-
-            @php
-            $subTotal = $item->harga * $item->qty;
-            $grandTotal += $subTotal
+            $grandTotal = 0;
             @endphp
 
-            <td class="border px-6 py-4">Rp. {{number_format ($subTotal) }}</td>
-        </tr>
-        @endforeach
-        <tr>
-            <td colspan="6">Grand Total</td>
-            <td>Rp. {{ number_format($grandTotal)}}</td>
-        </tr>
+            @foreach ($sales as $item )
+            <tr>
+                <td class="border px-6 py-4">{{ $loop->iteration }}</td>
+                <td class="border px-6 py-4">{{ $item->tanggal }}</td>
+                <td class="border px-6 py-4">{{ $item->nota_number }}</td>
+                {{-- <td class="border px-6 py-4">{{ $item->salesmaster->name }}</td> --}}
+                <td class="border px-6 py-4">{{ $item->customermaster->name }}</td>
+                <td class="border px-6 py-4">{{ $item->unit->name }}</td>
+                <td class="border px-6 py-4">{{ $item->qty }}</td>
+                <td class="border px-6 py-4">Rp. {{ number_format($item->harga) }}</td>
+
+                @php
+                $subTotal = $item->harga * $item->qty;
+                $grandTotal += $subTotal
+                @endphp
+
+                <td class="border px-6 py-4">Rp. {{number_format ($subTotal) }}</td>
+            </tr>
+            @endforeach
+            <tr>
+                <td colspan="7">Grand Total</td>
+                <td>Rp. {{ number_format($grandTotal)}}</td>
+            </tr>
         </tbody>
     </table>
+    <div class="date-container">
+        Banjarmasin, <span class="formatted-date">{{ now()->format('d-m-Y') }}</span>
+    </div>
     <p class="signature">(Supervisor/Kepala Bagian)</p>
 </body>
 

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use PDF;
+use Carbon\Carbon;
 use App\Models\Unit;
 use App\Models\Sales;
 use App\Mail\KirimEmail;
 use App\Models\Salesmaster;
+use Illuminate\Support\Str;
 use App\Mail\KirimanPending;
 use Illuminate\Http\Request;
 use App\Models\Customermaster;
@@ -24,6 +26,7 @@ class SalesController extends Controller
     public function index(Request $request)
     {
 
+
         if($request->has('search')){
             $sales = Sales::join('salesmasters', 'salesmasters.id', '=', 'sales.id_salesmaster')
             ->where('salesmasters.name', 'LIKE', '%' . $request->search . '%')
@@ -39,7 +42,7 @@ class SalesController extends Controller
             return $product->price * $product->qty;
         });
 
-        return view('sales.index', compact('sales', 'total'));
+        return view('sales.index', compact('sales', 'total','nota_number'));
     // end hitung total
 
     }
@@ -51,9 +54,12 @@ class SalesController extends Controller
      */
     public function create()
     {
+
+
        $unit = Unit::all();
        $salesmaster = Salesmaster::all();
        $customermaster = Customermaster::all();
+
         return view('sales.create', [
             'unit' => $unit,
             'salesmaster' => $salesmaster,
@@ -70,11 +76,22 @@ class SalesController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $perulanganInput = count($data["id_salesmaster"]);
-
-
+        $perulanganInput = count($data["id_customermaster"]);
+        // return $data;
         for ($i=0; $i < $perulanganInput; $i++) {
+
+        $now = Carbon::now();
+        $thnBulan = $now->year . $now->month;
+        // $cek = Sales::count();
+
+            $urut = random_int(100000, 999999);
+            $nota_number = 'VOE' . $thnBulan . $urut;
+            // $nota_number;
+
+        // VOE2023710000001
+
             Sales::create([
+                'nota_number' => $nota_number,
                 'id_salesmaster' => $data["id_salesmaster"][$i],
                 'id_customermaster' => $data["id_customermaster"][$i],
                 'id_unit' => $data["id_unit"][$i],
@@ -199,7 +216,7 @@ class SalesController extends Controller
         return $pdf->download('laporan_sales.pdf');
     }
 
-    public function notapembelianpdf()
+    public function notapembelianpdf($filter)
     {
 
         $f = $filter ?? null;
@@ -216,18 +233,34 @@ class SalesController extends Controller
                 ->orderBy( 'id_customermaster' )
                 ->select(DB::raw('count(*) as count, id_customermaster'))
                 ->get();
-        return $data['filter'] = $f;
+         $data['filter'] = $f;
 
         // $customPaper = array(0,0,500,700);
-        $pdf = PDF::loadview('laporansales/pernamapdf', $data);
-    	return $pdf->download('laporan-pernama.pdf');
+        $pdf = PDF::loadview('laporansales/notapembelianpdf', $data);
+    	return $pdf->download('laporan-notapembelian.pdf');
     }
 
-    public function pernamapdf()
+    public function notapembelianpdfid($id)
+{
+    $data['sales'] = Sales::where('id', $id)->get();
+
+    // Periksa apakah data penjualan ditemukan untuk ID yang diberikan
+    if ($data['sales']->isEmpty()) {
+        return redirect()->back()->with('error', 'Tidak ada data penjualan ditemukan untuk ID yang diberikan.');
+    }
+
+    $data['filter'] = $id;
+
+    // Generate the PDF
+    $pdf = PDF::loadview('laporansales/notapembelianpdf', $data);
+    return $pdf->download('laporan-notapembelian_perid.pdf');
+}
+
+    public function pernamapdf($filter)
     {
 
         $f = $filter ?? null;
-        // $data['title'] = "Laporan Karyawan";
+
         $data['sales'] = Sales::all();
         if($f == '' || $f == 'all')
         {
@@ -241,11 +274,38 @@ class SalesController extends Controller
                 ->orderBy( 'id_salesmaster' )
                 ->select(DB::raw('count(*) as count, id_salesmaster'))
                 ->get();
-        return $data['filter'] = $f;
+         $data['filter'] = $f;
 
         // $customPaper = array(0,0,500,700);
         $pdf = PDF::loadview('laporansales/pernamapdf', $data);
     	return $pdf->download('laporan-pernama.pdf');
+    }
+
+    public function perbulanpdf($filter)
+    {
+
+        $f = $filter ?? null;
+
+        $data['sales'] = Sales::all();
+        if($f == '' || $f == 'all')
+        {
+            $data['sales'] = Sales::all();
+        }
+        else
+        {
+            $data['sales'] = Sales::whereMonth('tanggal', now()->parse($f)->format('m'))
+            ->whereYear('tanggal', now()->parse($f)->format('Y'))
+            ->get();
+        }
+        $data['tanggal'] = Sales::groupBy( 'tanggal' )
+                ->orderBy( 'tanggal' )
+                ->select(DB::raw('count(*) as count, tanggal'))
+                ->get();
+         $data['filter'] = $f;
+
+        // $customPaper = array(0,0,500,700);
+        $pdf = PDF::loadview('laporansales/perbulanpdf', $data);
+    	return $pdf->download('laporan-perbulan.pdf');
     }
 
 
@@ -325,18 +385,18 @@ class SalesController extends Controller
     {
         $f = $request->filter ?? null;
 
-
-        $data['title'] = "Laporan Rekap Bulanan";
-
         if ($f == '' || $f == 'all') {
             $data['sales'] = Sales::paginate(10); // Use paginate() to enable pagination
         } else {
-            $data['sales'] = Sales::where('customer', $f)->paginate(10); // Use paginate() here as well
+            $data['sales'] = Sales::whereMonth('tanggal', now()->parse($f)->format('m'))
+            ->whereYear('tanggal', now()->parse($f)->format('Y'))
+            ->paginate(10); // Use paginate() here as well
+
         }
 
-        $data['id_customermaster'] = Sales::groupBy('id_customermaster')
-            ->orderBy('id_customermaster')
-            ->select(DB::raw('count(*) as count, id_customermaster'))
+        $data['tanggal'] = Sales::groupBy('tanggal')
+            ->orderBy('tanggal')
+            ->select(DB::raw('count(*) as count, tanggal'))
             ->get();
 
         $data['filter'] = $f;
@@ -369,7 +429,7 @@ class SalesController extends Controller
     {
         $f = $request->filter ?? null;
 
-        $data['title'] = "Laporan Nota Pembelian";
+        // $data['title'] = "Laporan Nota Pembelian";
 
         if ($f == '' || $f == 'all') {
             $data['sales'] = Sales::paginate(10); // Use paginate() to enable pagination
@@ -385,5 +445,6 @@ class SalesController extends Controller
         $data['filter'] = $f;
         return view('laporansales.notapembelian', $data);
     }
+
 
 }

@@ -5,6 +5,7 @@
         <br>
         <div>
             <p>Tanggal : {{ $sales->tanggal }}</p>
+            <p>Id Transaksi : {{ $item->nota_number }} </p>
             <p>Nama Sales : {{ $sales->salesmaster->name }}</p>
             <p>Nama Customer Yang Beli : {{ $sales->customermaster->name }}</p>
             <p>Unit : {{ $sales->unit->name }}</p>

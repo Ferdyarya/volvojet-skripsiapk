@@ -43,6 +43,11 @@
             right: 50px;
             font-size: 14px;
         }
+        .date-container {
+            font-family: arial;
+            text-align: left;
+            font-size: 10px;
+        }
     </style>
 
     <div class="rangkasurat">
@@ -99,6 +104,9 @@
         </tr> --}}
         </tbody>
     </table>
+    <div class="date-container">
+        Banjarmasin, <span class="formatted-date">{{ now()->format('d-m-Y') }}</span>
+    </div>
     <p class="signature">(Supervisor/Kepala Bagian)</p>
 </body>
 

@@ -21,30 +21,7 @@
                             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Export PDF</a>
                         <div class="flex justify-end mt-7">
                             @endif
-
-
-                            {{-- <div class=" xl:w-96 ">
-                                <form action="pernama" method="GET">
-                                    <input type="search" name="search" class="
-                                          form-control
-                                          block
-                                          w-full
-                                          px-3
-                                          py-1.5
-                                          text-base
-                                          font-normal
-                                          text-gray-700
-                                          bg-white bg-clip-padding
-                                          border border-solid border-gray-300
-                                          rounded
-                                          transition
-                                          ease-in-out
-                                          m-0
-                                          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-                                        " id="search" placeholder="Search" />
-                                </form>
-                            </div> --}}
-
+                            
                             <div class=" xl:w-96 ">
                                 <div class="float-right row">
                                     <form action="{{ url()->current() }}">

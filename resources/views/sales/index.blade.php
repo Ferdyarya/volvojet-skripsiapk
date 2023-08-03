@@ -44,6 +44,7 @@
                         <thead>
                             <tr>
                                 <th class="border px-6 py-4">No</th>
+                                <th class="border px-6 py-4">Id Transaksi</th>
                                 <th class="border px-6 py-4">Nama Sales</th>
                                 <th class="border px-6 py-4">Customer Yang Beli</th>
                                 <th class="border px-6 py-4">Unit Dijual</th>
@@ -62,6 +63,7 @@
                             @forelse ($sales as $item)
                             <tr>
                                 <td class="border px-6 py-4">{{ $loop->iteration }}</td>
+                                <td class="border px-6 py-4">{{ $item->nota_number}}</td>
                                 <td class="border px-6 py-4">{{ $item->salesmaster->name }}</td>
                                 <td class="border px-6 py-4">{{ $item->customermaster->name }}</td>
                                 <td class="border px-6 py-4">{{ $item->unit->name }}</td>

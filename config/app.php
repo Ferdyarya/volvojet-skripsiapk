@@ -181,6 +181,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Alfa6661\AutoNumber\AutoNumberServiceProvider::class,
 
 
 
@@ -198,6 +199,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
+        
 
         Barryvdh\DomPDF\ServiceProvider::class,
 

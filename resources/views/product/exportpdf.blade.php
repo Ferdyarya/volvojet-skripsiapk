@@ -43,6 +43,12 @@
             right: 50px;
             font-size: 14px;
         }
+        .date-container {
+            font-family: arial;
+            text-align: left;
+            font-size: 10px;
+        }
+
     </style>
 
     <div class="rangkasurat">
@@ -71,12 +77,11 @@
         <thead>
             <tr>
                 <th>No</th>
+                <th>Tanggal</th>
                 <th>Supplier Yang Diminta</th>
                 <th>Unit</th>
                 <th>Nama Barang</th>
-                <th>Harga</th>
                 <th>Qty</th>
-                <th>Tanggal</th>
             </tr>
         </thead>
         <tbody>
@@ -88,7 +93,7 @@
         <tr>
             <td class="border px-6 py-4">{{ $loop->iteration }}</td>
             <td class="border px-6 py-4">{{ $item->tanggal }}</td>
-            <td class="border px-6 py-4">{{ $item->supplier->name }}</td>
+            <td class="border px-6 py-4">{{ $item->supplier->nama }}</td>
             <td class="border px-6 py-4">{{ $item->unit->name }}</td>
             <td class="border px-6 py-4">{{ $item->nama }}</td>
             <td class="border px-6 py-4">{{ $item->qty }}</td>
@@ -100,6 +105,9 @@
         </tr> --}}
         </tbody>
     </table>
+    <div class="date-container">
+        Banjarmasin, <span class="formatted-date">{{ now()->format('d-m-Y') }}</span>
+    </div>
     <p class="signature">(Supervisor/Kepala Bagian)</p>
 </body>
 

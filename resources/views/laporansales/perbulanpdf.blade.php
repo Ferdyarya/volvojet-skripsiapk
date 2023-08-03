@@ -43,6 +43,13 @@
             right: 50px;
             font-size: 14px;
         }
+
+        .date-container {
+            font-family: arial;
+            text-align: left;
+            font-size: 10px;
+
+        }
     </style>
 
     <div class="rangkasurat">
@@ -104,11 +111,14 @@
         </tr>
         @endforeach
         <tr>
-            <td colspan="6">Grand Total</td>
+            <td colspan="7">Grand Total</td>2
             <td>Rp. {{ number_format($grandTotal)}}</td>
         </tr>
         </tbody>
     </table>
+    <div class="date-container">
+        Banjarmasin, <span class="formatted-date">{{ now()->format('d-m-Y') }}</span>
+    </div>
     <p class="signature">(Supervisor/Kepala Bagian)</p>
 </body>
 
